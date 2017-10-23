@@ -1,0 +1,154 @@
+<!DOCTYPE struts PUBLIC       
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+
+	<package name="admin.module" extends="mydefault"
+		namespace="/admin">
+
+		<action name="getModuleTreeUI"
+			class="zzvcom.sys.action.ModuleAction" method="getModuleTreeUI">
+			<result name="success">Module_tree.jsp</result>
+		</action>
+
+		<!-- 根据父类id获得模块列表 -->
+		<action name="getModuleListByParentid"
+			class="zzvcom.sys.action.ModuleAction"
+			method="getModuleListByParentid">
+			<result name="success">Module_list.jsp</result>
+		</action>
+		<!-- 保存模块  -->
+		<action name="saveModule" class="zzvcom.sys.action.ModuleAction"
+			method="saveModule">
+			<result name="input">Module_addOrEdit.jsp</result>
+		</action>
+		<!-- 删除模块  -->
+		<action name="deleteModule"
+			class="zzvcom.sys.action.ModuleAction" method="deleteModule">
+			<result name="success">Module_list.jsp</result>
+		</action>
+		<!-- 修改模块  -->
+		<action name="updateModule"
+			class="zzvcom.sys.action.ModuleAction" method="updateModule">
+			<result name="input">Module_addOrEdit.jsp</result>
+		</action>
+		<!-- 跳转至保存模块或修改模块页面  -->
+		<action name="toSaveOrUpdateModulePage"
+			class="zzvcom.sys.action.ModuleAction"
+			method="toSaveOrUpdateModulePage">
+			<result name="success">Module_addOrEdit.jsp</result>
+		</action>
+		<action name="toModuleManagePage"
+			class="zzvcom.sys.action.ModuleAction">
+			<result name="success">Module_frame.jsp</result>
+		</action>
+
+
+
+		<!-- 操作配置 -->
+		<!-- 根据moduelid获得操作列表 -->
+		<action name="getOperationListByModuleid"
+			class="zzvcom.sys.action.ModuleAction"
+			method="getOperationListByModuleid">
+			<result name="tip">Module_tip.jsp</result>
+			<result name="success">Module_Oper_list.jsp</result>
+		</action>
+		<!--跳转至新增或修改操作页面 -->
+		<action name="toSaveOrUpdateOperPage"
+			class="zzvcom.sys.action.ModuleAction"
+			method="toSaveOrUpdateOperPage">
+			<result name="success">Module_Oper_addOrEdit.jsp</result>
+		</action>
+		<!--保存操作 -->
+		<action name="saveOper" class="zzvcom.sys.action.ModuleAction"
+			method="saveOper">
+			<result name="input">Module_Oper_addOrEdit.jsp</result>
+		</action>
+		<!--修改操作 -->
+		<action name="updateOper" class="zzvcom.sys.action.ModuleAction"
+			method="updateOper">
+			<result name="input">Module_Oper_addOrEdit.jsp</result>
+		</action>
+		<!--删除操作 -->
+		<action name="deleteOper" class="zzvcom.sys.action.ModuleAction"
+			method="deleteOper">
+			<result name="success">Module_Oper_list.jsp</result>
+		</action>
+		
+		<!-- 数据字典信息管理 -->
+		<action name="dictmanager" class="zzvcom.sys.action.DictMgtAction"> 
+			
+			<result name="success">dictmanager.jsp</result>
+		</action>
+		
+				<!-- 数据字典类别管理 -->
+		<action name="dictclassmanager" class="zzvcom.sys.action.DictClassManager"> 
+			
+			<result name="success">dictclassmanager.jsp</result>
+		</action>
+		
+					<!-- 数据字典类别管理 -->
+		<action name="magdictclass" class="zzvcom.sys.action.MagDictClass"> 
+		    
+			<result name="success">magdictclass.jsp</result>
+		</action>
+		
+						<!-- 数据字典类别管理保存提交 -->
+		<action name="savedicttype" class="zzvcom.sys.action.SaveDictType"> 
+			
+		</action>
+		
+		
+					<!-- 基础分类类信息管理保存提交 -->
+		<action name="savedicttypeinfo" class="zzvcom.sys.action.SaveDictTypeInfo"> 
+			<interceptor-ref name="mydefault2" />
+		</action>
+					<!-- 基础分类类信息管理设置状态 -->
+		<action name="setdicttypestate" class="zzvcom.sys.action.SetDictTypeState"> 
+			<interceptor-ref name="mydefault2" />
+		</action>
+		
+					<!-- 数据字典类别列表 -->
+		<action name="finddictlist" class="zzvcom.sys.action.FindDictList"> 
+		    
+			<result name="success">finddictlist.jsp</result>
+		</action>
+		
+						<!-- 基础分类类别列表 -->
+		<action name="finddictlisttomgt" class="zzvcom.sys.action.FindDictList"> 
+		   
+			<result name="success">finddictlisttomgt.jsp</result>
+		</action>
+		
+		
+			<!-- 基础分类内容列表 -->
+		<action name="finddictinfobytypecode" class="zzvcom.sys.action.FindDictinfoBytypecode"> 
+
+			<result name="success">finddictinfobytypecode.jsp</result>
+		</action>
+		
+		<action name="finddictinfobytypecode_com" class="zzvcom.sys.action.FindDictinfoBytypecode"> 
+		   <interceptor-ref name="mydefault2" />
+			<result name="success">finddictinfobytypecode_com.jsp</result>
+		</action>
+	
+						<!-- 基础分类内容信息管理 -->
+	<action name="magdictclassinfo" class="zzvcom.sys.action.MagDictClassInfo"> 
+	    <interceptor-ref name="mydefault2" />
+		<result name="success">magdictclassinfo.jsp</result>
+	</action>
+	<!-- 系统参数配置 -->
+	<action name="findBasicinfoList" class="zzvcom.sys.action.BasicinfoAction" method="findBasicinfoList"> 
+		
+		<result name="success">findbasicinfolist.jsp</result>
+	</action>
+	<!-- 系统参数配置 -->
+	<action name="updateBasicinfo" class="zzvcom.sys.action.BasicinfoAction" method="updateBasicinfo"> 
+		
+		<result name="success">/common/success_custom.jsp</result>
+		<result name="error">/common/error_custom.jsp</result>
+	</action>
+	</package>
+</struts>
+

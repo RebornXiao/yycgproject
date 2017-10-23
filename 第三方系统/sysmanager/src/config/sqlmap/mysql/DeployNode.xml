@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DeployNode">
+
+	<sql id="SELECT-deployNode">
+		select t.nodeid nodeId,
+		t.sysid sysId,
+		t.url nodeUrl,
+		t.name nodeName,
+		t.showorder showOrder,
+		t2.sysname sysName,
+		t.icon  nodeIcon
+		from BSS_SYS_DEPLOYNODE t ,BSS_SYS_SYSTEM t2 
+		where t.sysid=t2.sysid and t.sysid=#sysId#
+	</sql>
+    <sql id="select-node">
+        select t.nodeid nodeId,
+        t.sysid sysId,
+        t.url nodeUrl,
+        t.name nodeName,
+        t.showorder showOrder,
+        t2.sysname sysName,
+        t.icon  nodeIcon
+        from BSS_SYS_DEPLOYNODE t ,BSS_SYS_SYSTEM t2 
+        where t.sysid=t2.sysid
+    </sql> 
+	<sql id="prefixTotalCount">select count(*) total from (</sql>
+	<sql id="suffixTotalCount">) xx</sql>
+	<sql id="CONDITION-nodeId">and t.name = #nodeName#</sql>
+	<select id="getDeployNodeList_count" parameterClass="string"
+		resultClass="int">
+		<include refid="prefixTotalCount" />
+        <include refid="SELECT-deployNode" />
+		<include refid="suffixTotalCount" />
+	</select>
+    
+	<select id="getDeployNodeList" parameterClass="string"
+		resultClass="deployNode">
+		<include refid="SELECT-deployNode" />
+	</select>
+	
+	<select id="getAllDeployNodeList" parameterClass="string" resultClass="deployNode">
+		select t.nodeid    nodeId,
+		       t.sysid     sysId,
+		       t.url       nodeUrl,
+		       t.name      nodeName,
+		       t.showorder showOrder,
+		       t2.sysname  sysName,
+		       t.icon      nodeIcon
+		  from BSS_SYS_DEPLOYNODE t, BSS_SYS_SYSTEM t2
+		 where t.sysid = t2.sysid
+		 and t.sysid = #systemId#
+		 order by t.nodeid
+	</select>
+	
+	<insert id="insertDeploy" parameterClass="deployNode">
+		insert into BSS_SYS_DEPLOYNODE
+		  (sysid, name, url, showorder, icon)
+		values
+		  (#sysId#, #nodeName#, #nodeUrl#, #showOrder#, #nodeIcon#)
+	</insert>
+	
+	<update id="updateDeployNode">
+		update BSS_SYS_DEPLOYNODE set  url=#nodeUrl# ,showorder=#showOrder# ,icon=#nodeIcon#,name=#nodeName# where nodeid=#nodeId#
+	</update>
+	<delete id="deleteDeployNode" parameterClass="string">
+		delete from  BSS_SYS_DEPLOYNODE where nodeid=#nodeId#
+	</delete>
+<!--	<select id="getDeployNodeTree" resultClass="deployNode">-->
+<!--	   select t.sysid,t.sysname from bss_sys_system t order by t.showOrder-->
+<!--	</select>-->
+	<select id="getUsedDeployNode" parameterClass="string" resultClass="deployNode">
+       select nodeid from BSS_SYS_ROLENODE  where nodeid=#nodeId#
+    </select>
+    <select id="getDeployNodeIdByName" parameterClass="string" resultClass="deployNode">
+       SELECT t.NAME,t.NODEID,t.ICON,t.SHOWORDER,t.SYSID,t.URL FROM BSS_SYS_DEPLOYNODE t WHERE t.NAME=#nodename#
+    </select>
+      <select id="getDeployNodeNameById" parameterClass="string" resultClass="deployNode">
+       SELECT t.NAME,t.NODEID,t.ICON,t.SHOWORDER,t.SYSID,t.URL FROM BSS_SYS_DEPLOYNODE t WHERE t.NODEID=#nodeId#
+    </select>
+    <select id="getDeployNodeByName" parameterClass="deployNode"
+		resultClass="deployNode">	
+        <include refid="SELECT-deployNode" />
+		<include refid="CONDITION-nodeId" />
+	</select>
+</sqlMap>
+

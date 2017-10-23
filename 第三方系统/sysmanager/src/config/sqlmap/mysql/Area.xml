@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Area">
+	<sql id="select-all-area">
+		select
+		  t.areaid       as areaId,
+		  t.areaname     as areaName,
+		  t.arealevel    as areaLevel,
+		  t.areafullname as fullName,
+		  t.parentid     as upperAreaId,
+		  t2.areaname    as upperAreaName,
+		  t.shortname    as shortName,
+		  t.isunit       as isUnit,
+		  t.lastupdate   as lastUpdateTime,
+		  t.yzcode       as yzCode,
+		  t.vchar1       as showOrder, 
+		  t.vchar2       as businessLevel  
+		from BSS_SYS_AREA t
+		  LEFT JOIN BSS_SYS_AREA t2
+		    on t.parentid = t2.areaid
+		where 1=1    
+	</sql>
+    <sql id="condition-equal-areaId"> and t.areaid = #areaId#</sql>
+    <sql id="condition-areaname"> and t.areaname = #areaName#</sql>
+    <sql id="condition-like-areaId"><![CDATA[and t.areaid like '$areaId$%' and t.areaid <> #areaId#  ]]></sql>
+    <sql id="condition-username">and t.areaid in (select ua.areaid from BSS_SYS_USERAREA ua where ua.username = #userName#)</sql>
+    <sql id="condition-username-cascade">
+		and EXISTS(select
+		                 1
+		               from (select
+		                       ua.areaid
+		                     from BSS_SYS_USERAREA ua
+		                     where ua.username = #userName#) uaa
+		               where t.AREAID like CONCAT(uaa.areaid,'%'))
+    </sql>
+    
+	<sql id="prefix-total">select count(*) total from (</sql>
+	<sql id="suffix-total">) xx</sql>
+
+    <select id="getAreaById" parameterClass="string" resultClass="area">
+        <include refid="select-all-area"/>
+        <include refid="condition-equal-areaId"/>
+    </select>
+    <select id="getAreaByName" parameterClass="string" resultClass="area">
+        <include refid="select-all-area"/>
+        <include refid="condition-areaname"/>
+    </select>
+
+	<select id="getAreaListForCommonUser" parameterClass="map" resultClass="area">
+        <include refid="select-all-area" />
+        <dynamic>
+            <isNotNull prepend="AND" property="areaId">
+                t.parentid = #areaId#
+            </isNotNull>
+        </dynamic>
+        <include refid="condition-username-cascade"/>
+        order by t.VCHAR1+0 
+	</select>
+    <select id="getAreaListForCommonUser_count" parameterClass="map" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-area" />
+        <dynamic>
+            <isNotNull prepend="AND" property="areaId">
+                t.parentid = #areaId#
+            </isNotNull>
+        </dynamic>
+        <include refid="condition-username-cascade"/>
+        order by t.VCHAR1+0 
+        <include refid="suffix-total"/>
+    </select>
+    
+    <select id="getRoleArea" parameterClass="string" resultClass="area">
+        <include refid="select-all-area"/>
+         and t.areaid = (select ra.areaid from BSS_SYS_ROLEAREA ra where ra.roleid = #roleId#)
+    </select>
+    
+    <select id="getUserArea" parameterClass="string" resultClass="area">
+        <include refid="select-all-area"/>
+         and t.areaid = (select areaid from BSS_SYS_USERAREA where username=#username#)
+    </select>
+    
+    <select id="getAreaListForAdminUser" parameterClass="map" resultClass="area" >
+        <include refid="select-all-area" />
+        <dynamic>
+            <isNotNull prepend="AND" property="areaId">
+                t.parentid = #areaId#
+            </isNotNull>
+        </dynamic>
+        order by t.VCHAR1+0
+    </select>
+    <select id="getAreaListForAdminUser_count" parameterClass="map" resultClass="int" >
+        <include refid="prefix-total"/>
+        <include refid="select-all-area" />
+        <dynamic>
+            <isNotNull prepend="AND" property="areaId">
+                t.parentid = #areaId#
+            </isNotNull>
+        </dynamic>
+        order by t.VCHAR1+0 
+        <include refid="suffix-total"/>
+    </select>
+    
+    <select id="getAdminUserDirectAreaList" resultClass="area">
+        <include refid="select-all-area" />
+        and t.areaid = '0'
+    </select>
+    <select id="getCommonUserDirectAreaList" parameterClass="string" resultClass="area">
+        <include refid="select-all-area"/>
+        <include refid="condition-username"/>
+    </select>
+    
+    <select id="getLowerAreaList" parameterClass="string" resultClass="area">
+         <include refid="select-all-area" />
+         and t.parentid = #areaId#
+    </select>
+    <select id="getAllLowerAreaList">
+        <include refid="select-all-area"/>
+        <include refid="condition-like-areaId"/>
+    </select>
+    
+    <select id="getMaxAreaId" parameterClass="string" resultClass="int">
+		select nvl(max(trim(trailing '.' from replace(t.AREAID, #parentId#, '')) + 0), 0) as maxAreaId
+		  from BSS_SYS_AREA t
+		 where t.PARENTID = #parentId#
+    </select>
+    
+    <select id="getUpperAreaIdListByAreaIds" parameterClass="map" resultClass="string">
+        select distinct t.parentid from BSS_SYS_AREA t where t.areaid in
+        <iterate property="areaIdList" open="(" close=")" conjunction=",">
+            #areaIdList[]#
+        </iterate>
+    </select>
+    
+    <select id="getNeInfoAreaList" parameterClass="string" resultClass="area" >
+        select t.areaid as areaId from config.NeInfo t where t.areaid = #areaId#
+    </select>
+    
+    <select id="getRoleUsedAreaList" parameterClass="string" resultClass="area" >
+        select t.areaid as areaId from BSS_SYS_ROLEAREA t where t.areaid = #areaId#
+    </select>
+    <select id="getUserUsedAreaList" parameterClass="string" resultClass="area" >
+        select t.areaid as areaId from BSS_SYS_USERAREA t where t.areaid = #areaId#
+    </select>
+    <insert id="insertArea">
+		insert into BSS_SYS_AREA
+		  (areaid,areaname, arealevel, areafullname, 
+		  parentid, shortname, isunit, lastupdate, yzcode, vchar1, vchar2)
+		values
+		  (#areaId#, #areaName#, #areaLevel#, #fullName#,
+		   #upperAreaId#, #shortName#, #isUnit#, #lastUpdateTime#, #yzCode#, #showOrder#, #businessLevel#)
+    </insert>
+    <update id="updateArea">
+		update BSS_SYS_AREA
+		   set areaname     = #areaName#,
+		       areafullname = #fullName#,
+		       shortname    = #shortName#,
+		       isunit       = #isUnit#,
+		       lastupdate   = #lastUpdateTime#,
+		       yzcode       = #yzCode#,
+		       vchar1       = #showOrder#,
+		       vchar2       = #businessLevel#
+		 where areaid = #areaId#       
+    </update>
+    <delete id="deleteArea">
+        delete from BSS_SYS_AREA where areaid = #areaId# 
+    </delete>
+</sqlMap>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE sqlMapConfig
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings useStatementNamespaces="true" />
+	
+	<typeAlias alias="business" type="com.zzvcom.sysmag.pojo.Business"/>
+	<typeAlias alias="area" type="com.zzvcom.sysmag.pojo.Area"/>
+	<typeAlias alias="user" type="com.zzvcom.sysmag.pojo.User"/>
+	<typeAlias alias="role" type="com.zzvcom.sysmag.pojo.Role"/>
+	<typeAlias alias="system" type="com.zzvcom.sysmag.pojo.SubSystem"/>
+	<typeAlias alias="module" type="com.zzvcom.sysmag.pojo.Module"/>
+	<typeAlias alias="operation" type="com.zzvcom.sysmag.pojo.Operation"/>
+	<typeAlias alias="authElement" type="com.zzvcom.sysmag.pojo.AuthElement"/>
+	<typeAlias alias="deployNode" type="com.zzvcom.sysmag.pojo.DeployNode" />
+	<typeAlias alias="syswebservicecfg" type="com.zzvcom.sysmag.pojo.SysWebserviceCfg"/>
+    <typeAlias alias="webservicetype" type="com.zzvcom.sysmag.pojo.WebserviceType"/>
+    <typeAlias alias="task" type="com.zzvcom.sysmag.pojo.Task"/>
+	
+	<sqlMap resource="config/sqlmap/mysql/SysWebservice.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Business.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Area.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/User.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Role.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/System.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Module.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Operation.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Authority.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/DeployNode.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/Task.xml"/>
+	<sqlMap resource="config/sqlmap/mysql/UserLog.xml"/>
+</sqlMapConfig>

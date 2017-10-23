@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="vcomuser">
+
+	<sql id="queryByUser_where">
+		<isNotEmpty prepend="and" property="username">
+			<![CDATA[username like '%$username$%']]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="usercode">
+			<![CDATA[usercode=#usercode#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="role">
+			<![CDATA[role=#role#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="groupid">
+			<![CDATA[groupid=#groupid#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sysid">
+			<![CDATA[sysid=#sysid#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="isstart">
+			<![CDATA[isstart=#isstart#]]>
+		</isNotEmpty>
+	</sql>
+	<select id="queryUserBySplitPageCount" resultClass="int" parameterClass="map">
+		select count(*) from vcom_sys_user 
+		where 1=1
+		<include refid="vcomuser.queryByUser_where" />
+	</select>
+	<select id="queryUserBySplitPage" resultClass="zzvcom.sys.pojo.VcomSysUser" parameterClass="map">
+		<isNotEmpty property="start">
+			select * from (
+			select rownum pages_rownum_t,q_t1.* from (
+		</isNotEmpty>
+		select * from vcom_sys_user 
+		where 1=1
+		<include refid="vcomuser.queryByUser_where" />
+		order by id
+		
+<isNotEmpty property="start">
+		<![CDATA[
+				)q_t1 where rownum<=$rowend$
+				  )q_t
+		  where q_t.pages_rownum_t>$start$
+		  ]]>
+		</isNotEmpty>
+	</select>
+	
+	<!-- 得到所有的用户 -->
+	<select id="getAllBySplitPage" resultClass="zzvcom.sys.pojo.VcomSysUser" parameterClass="map">
+		<isNotEmpty property="start">
+			select * from (
+			select rownum pages_rownum_t,q_t1.* from (
+		</isNotEmpty>
+		select * from vcom_sys_user where username like '%$username$%' order by id
+		<isNotEmpty property="start">
+		<![CDATA[
+				)q_t1 where rownum<=$rowend$
+				  )q_t
+		  where q_t.pages_rownum_t>$start$
+		  ]]>
+		</isNotEmpty>
+	</select>
+	<select id="getAllBySplitPageCount" resultClass="int" parameterClass="map">
+		select count(*) from vcom_sys_user where username like '%$username$%'
+	</select>
+	
+	<select id="queryByCode" resultClass="zzvcom.sys.pojo.VcomSysUser" parameterClass="String">
+		select * from vcom_sys_user where usercode=#usercode# order by id
+	</select>
+	<select id="queryByUser" resultClass="zzvcom.sys.pojo.VcomSysUser" parameterClass="map">
+		select * from vcom_sys_user where usercode=#usercode# and password=#password#
+	</select>
+	<!--保存用户信息 -->
+	<insert id="create" parameterClass="zzvcom.sys.pojo.VcomSysUser">
+		insert into vcom_sys_user ( usercode,username, role, password,sex,phone,createtime,updatetime,remark,groupid,sysid) 
+		values ( #usercode#,#username#, #role#, #password#,#sex#,#phone#, sysdate, sysdate, #remark#,#groupid#,#sysid#)
+		
+		<selectKey resultClass="java.lang.String" keyProperty="id">
+			SELECT id FROM vcom_sys_user where  usercode = #usercode#
+		</selectKey>
+		 
+	</insert>
+	<!--删除用户信息 -->
+	<delete id="delete" parameterClass="zzvcom.sys.pojo.VcomSysUser">
+		delete from vcom_sys_user where id =#id# and isstart!='1'
+	</delete>
+	<!--修改用户信息 -->
+	<update id="update" parameterClass="zzvcom.sys.pojo.VcomSysUser">
+		update vcom_sys_user set 
+			<!--usercode = #usercode#, -->
+			username = #username#,
+			permissions=#permissions#,
+			role = #role#,
+			groupid = #groupid#,
+			sex = #sex#, 
+			phone = #phone#, 
+			password = #password#,
+			updatetime = sysdate, 
+			remark = #remark#,
+			sysid=#sysid#
+			where id = #id# 
+	</update>
+	<!--根据id查询用户信息 -->
+	<select id="query" resultClass="zzvcom.sys.pojo.VcomSysUser" parameterClass="java.lang.String">
+		select * from vcom_sys_user where id=#id#
+	</select>
+</sqlMap>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings> 
+  <data_type>xml</data_type>                                 
+  <reload_data_interval>3</reload_data_interval>             
+  <add_time_stamp>true</add_time_stamp>                
+  <digits_after_decimal>0</digits_after_decimal>      
+
+  <background>
+    <color>000000</color>
+    <alpha>80</alpha>
+    <border_color>00CC00</border_color>
+    <border_alpha>60</border_alpha>
+    <file>1</file>
+  </background>
+  <plot_area>
+    <color>000000</color>
+    <alpha>100</alpha>
+    <border_color>00FF00</border_color>
+    <margins>
+      <top>15</top>
+      <left>80</left>
+      <right>30</right>
+      <bottom>40</bottom>
+    </margins>
+  </plot_area>
+  <grid>
+    <x>
+      <color>006600</color>
+      <alpha>100</alpha>
+      <approx_count>6</approx_count>
+    </x>
+    <y_left>
+      <color>006600</color>
+      <alpha>100</alpha>
+      <fill_color>00CC66</fill_color>
+    </y_left>
+  </grid>
+  
+  <axes>
+    <x>
+      <width>1</width>
+      <color>FFFFFF</color>
+    </x>
+    <y_left>
+      <width>1</width>
+      <color>FFFFFF</color>
+    </y_left>
+  </axes>
+
+  <values>                                                   
+    <x>                                       
+      <skip_first>true</skip_first>          
+      <skip_last>false</skip_last>    
+      <color>FFFF99</color>
+      <frequency>1</frequency>       
+    </x>
+    <y_left>                                  
+      <min></min>                           
+      <max></max>
+      <unit></unit> 
+      <color>33FF00</color>                         
+      <unit_position>right</unit_position>
+      <inside>false</inside>
+      <skip_last>true</skip_last>     
+    </y_left>
+  </values>  
+  
+  <indicator>                  
+    <zoomable>false</zoomable> 
+    <color>92C7E7</color>
+    <x_balloon_text_color>FFFFFF</x_balloon_text_color>
+    <y_balloon_on_off>false</y_balloon_on_off>
+  </indicator>
+    
+  <legend>                     
+    <enabled>false</enabled>   
+  </legend>
+  
+  <graphs>
+    <graph>
+      <color>FFCC00</color>
+      <bullet></bullet>
+    </graph>
+      <graph>
+      <color>00FF00</color>
+      <bullet>square_outlined</bullet>
+    </graph>
+  </graphs> 
+  
+</settings>

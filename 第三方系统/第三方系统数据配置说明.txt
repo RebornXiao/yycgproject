@@ -1,0 +1,3 @@
+第三方系统不是maven项目
+
+修改sysconfig,和sysmanager系统中的/WEB-INF/proxool.xml文件

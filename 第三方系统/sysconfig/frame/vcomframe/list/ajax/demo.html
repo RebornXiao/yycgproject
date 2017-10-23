@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="vcomframe/js/common.js"></script>
+ </HEAD>
+
+ <BODY>
+ <a href="#" onclick="onajax();">ajax获取服务器数据</a>
+
+  <div id="hao" style="top:700px;margin-left:100px;font-family: verdana;font-size: 9pt;border-width:1px;border-color: #caa700;border-style: solid;background-color: #ffffa2;padding: 4;margin: 0;">
+    <pre>
+    <b>一、功能简介</b><br>
+     jQuery是一个快速的，简洁的javaScript库，使用户能更方便地处理HTML documents、events、实现动画效果，并且方便地为网站提供AJAX交互。
+
+    <b>二、使用说明</b>  <br>
+     1、<script type="text/javascript" src="vcomframe/list/ajax/jquery.js"></script>
+      2.  使用并设置属性
+         参见样例
+  </div>
+    <script type="text/javascript">
+  		function onajax(){
+			$.get("vcomframe/list/ajax/demo.html",{id:1},rend); 
+			function rend(xml){ 
+　　				alert(xml); 
+　　			} 
+		}
+		onajax();
+  </script>
+ </BODY>
+</HTML>

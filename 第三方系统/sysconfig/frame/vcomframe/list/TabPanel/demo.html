@@ -1,0 +1,79 @@
+﻿
+<html>
+<head>
+<title>标签面板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="vcomframe/list/TabPanel/tabpanel.js"></script>
+<script type="text/javascript" src="vcomframe/js/common.js"></script>
+</head>
+<body>
+<div align=center>
+    <br>
+<div class="tab-pane" style='height:300px;width:600px'>
+	<div class="tab-page">
+		<div class="tab">分页一</div>
+        这里放置显示内容(可以使任意的HTML代码)
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+	<div class="tab-page">
+		<div class="tab">分页二</div>
+         这里放置显示内容	(可以使任意的HTML代码)
+
+	</div>
+
+	<div class="tab-page">
+		<div class="tab">分页三</div>
+          这里放置显示内容(可以使任意的HTML代码)
+		  <br><br><br><br><br><br><br><br>
+	</div>
+
+	<div class="tab-page">
+		<div class="tab">分页四</div>
+        这里放置显示内容(可以使任意的HTML代码)
+    </div>
+</div>
+
+
+
+</div>
+
+
+<div style="margin-left:100px;font-family: verdana;font-size: 9pt;border-width:1px;border-color: #caa700;border-style: solid;background-color: #ffffa2;padding: 4;margin: 0;">
+    <pre>
+    <b>一、功能简介</b><br>
+    标签面板可以固定的位置，显示多种信息，提高了页面空间使用率。
+        <br>
+    <b>二、使用说明</b><br>
+     1、在页面中引入tabpanel.js文件
+    例如：< script="javascript" src="vcomframe/list/TabPanel/tabpanel.js">< /script>
+2、然后在页面上需要使用TabPanel的位置编写代码
+        < div class="tab-pane" style="height:300px;width:600px">
+            < div class='tab-page'>
+                < div class='tab'>分页一</ div>
+                分页一显示内容
+            < /div>
+            < div class='tab-page'>
+                < div class='tab'>分页二< /div>
+                分页二显示内容
+            < /div>
+         < /div>
+     </pre>
+ </div>
+ <script type="text/javascript">
+  window.onload=function(){
+    
+    
+    setTimeout("read()",100);
+  
+  }
+  
+	function  read(){
+	__tablePanel[0].setSelectedIndex(0);
+	}
+ </script>
+</body>
+</html>

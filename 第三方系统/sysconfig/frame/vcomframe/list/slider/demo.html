@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css"href="vcomframe/list/slider/slider.css" />
+  <script type="text/javascript" src="vcomframe/list/slider/Slider.js"></script>
+  <script type="text/javascript" src="vcomframe/list/slider/Drag.js"></script>
+  <script type="text/javascript" src="vcomframe/js/common.js"></script>
+ </HEAD>            
+
+ <BODY>
+ <table cellspacing="0" cellpadding="0">
+	<tr>
+		<td><input readonly="readonly" value="10000" name="hue" id="hue" style="width: 40px;">&nbsp;</td>
+		<td>
+			<div id="_hue" class="slider3">
+			  <div id="_hue1" class="bar3"></div>
+			</div>
+		</td>
+	</tr>
+</table>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		var hue = new Slider("_hue", "_hue1","hue", {
+	onMove: function(){
+		$("hue").value = Math.round(this.GetValue());
+	},MaxValue:10000,MinValue:0
+},500);
+	//-->
+	</SCRIPT>
+ </BODY>
+</HTML>

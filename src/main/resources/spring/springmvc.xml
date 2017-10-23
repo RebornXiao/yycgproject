@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+    
+	<!-- 注解驱动 -->
+	<!-- <mvc:annotation-driven >  
+	    <mvc:argument-resolvers>  
+	           <bean class="yycg.base.action.converters.UserArgumentResolver"/>  
+	    </mvc:argument-resolvers>  
+	</mvc:annotation-driven> --> 
+	<mvc:annotation-driven/>
+	<!-- 组件扫描，用于控制层 --> 
+	<context:component-scan base-package="yycg" />
+	
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+		
+	<!-- 自定义注册属性编辑器 -->
+	<!-- <bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="cn.itcast.project.yycg.base.action.converters.StringTrimConverter" />
+				<bean class="cn.itcast.project.yycg.base.action.converters.DateConverter" />
+				<bean class="cn.itcast.project.yycg.base.action.converters.DatetimeConverter" />
+			</list>
+		</property>
+	</bean> -->
+	
+	
+	<!-- Http messageConverters，用于将对象输出到客户端 -->
+	<bean id="jsonmessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	</bean>
+
+	<!-- 全局异常处理器 -->
+	<bean id="handlerExceptionResolver"
+		class="yycg.base.process.exception.ExceptionResolverCustom">
+		<property name="jsonmessageConverter" ref="jsonmessageConverter" />
+
+	</bean>
+
+	<!-- 文件上传 -->
+	<!-- <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		设置上传文件的最大尺寸为5MB
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean> -->
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器,顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="yycg.base.filter.LoginInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="yycg.base.filter.PermissionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+</beans>

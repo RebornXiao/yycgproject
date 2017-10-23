@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="vcommodule">
+	<select id="getModuleList"
+		resultClass="zzvcom.sys.pojo.VcomSysModule">
+		select * from vcom_sys_module m order by m.depth asc,m.sort asc
+	</select>
+	<select id="getModuleListByIds"
+		resultClass="zzvcom.sys.pojo.VcomSysModule" parameterClass="String">
+		select * from vcom_sys_module m where id in ($inIds$) order by m.depth asc,m.sort asc
+	</select>
+	<select id="getModuleListByNotIds"
+		resultClass="zzvcom.sys.pojo.VcomSysModule" parameterClass="String">
+		select * from vcom_sys_module m where id not in ($notinIds$)
+		order by m.depth asc,m.sort asc
+	</select>
+	<!--  -->
+	<select id="getModuleListByParentid"
+		resultClass="zzvcom.sys.pojo.VcomSysModule" parameterClass="map">
+		select * from vcom_sys_module m where parentid=#parentid#
+		<isNotEmpty property="modulename">
+			and modulename like '%$modulename$%'
+		</isNotEmpty>
+		order by m.depth asc,m.sort asc
+		<isNotEmpty property="start">limit #start#, #end#</isNotEmpty>
+	</select>
+	<select id="getModuleListCountByParentid" resultClass="int"
+		parameterClass="map">
+		select count(*) from vcom_sys_module m where parentid=#parentid#
+		<isNotEmpty property="start">
+			and modulename like '%$modulename$%'
+		</isNotEmpty>
+
+	</select>
+	<!--  是否包含模块名称-->
+	<select id="isContainModulename" resultClass="int"
+		parameterClass="map">
+		select count(*) from vcom_sys_module m where parentid=#parentid#
+		and modulename =#modulename#
+		<isGreaterEqual compareValue="0" property="exceptid">
+			and id!= #exceptid#
+		</isGreaterEqual>
+
+	</select>
+	<!--  插入模块-->
+	<insert id="create"
+		parameterClass="zzvcom.sys.pojo.VcomSysModule">
+
+		insert into vcom_sys_module ( modulename, depth, sort, link,
+		parentid, remark, createtime, updatetime ) values (
+		#modulename#, #depth#, #sort#, #link#, #parentid#, #remark#,
+		#createtime#, #updatetime# )
+
+	</insert>
+	<delete id="delete" parameterClass="long">
+		delete from vcom_sys_module where id = #id#
+	</delete>
+
+	<!--  -->
+	<select id="query" resultClass="zzvcom.sys.pojo.VcomSysModule"
+		parameterClass="long">
+		select * from vcom_sys_module m where id=#id#
+
+	</select>
+	<update id="update">
+		update vcom_sys_module set modulename = #modulename# , depth =
+		#depth# , sort = #sort# , link = #link# , remark = #remark# ,
+		updatetime = #updatetime#
+
+		where id = #id#
+	</update>
+</sqlMap>

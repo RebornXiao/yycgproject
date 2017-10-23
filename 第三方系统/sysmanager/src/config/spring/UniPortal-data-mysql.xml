@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+		
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/config/mysql_jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="5"/>
+        <property name="maxIdle" value="5"/>
+        <property name="maxWait" value="60"/>
+        <property name="defaultAutoCommit" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="300"/>
+        <property name="validationQuery" value="select 1"/>
+		<property name="timeBetweenEvictionRunsMillis" value="1800000"/>
+		<property name="minEvictableIdleTimeMillis" value="3600000"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="true"/>
+	</bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- SqlMap setup for iBATIS Database Layer -->
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:/config/sqlmap/mysql/SqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="sqlExecutor"
+		class="com.zzvcom.sysmag.persistence.LimitSqlExecutor">
+		<property name="dialect">
+			<bean class="com.zzvcom.sysmag.persistence.dialect.MySqlDialect" />
+		</property>
+	</bean>
+
+	<!-- ============ DAO DEFINITIONS: IBATIS IMPLEMENTATIONS ============= -->
+	<context:component-scan base-package="com.zzvcom.sysmag.persistence" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	
+	<bean id="baseDao" class="com.zzvcom.sysmag.persistence.BaseDaoiBatis"
+		abstract="true" init-method="initialize">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="sqlExecutor" ref="sqlExecutor" />
+	</bean>
+	<bean id="businessDao" class="com.zzvcom.sysmag.persistence.dao.impl.BusinessDaoImpl" parent="baseDao" />
+	<bean id="areaDao" class="com.zzvcom.sysmag.persistence.dao.impl.AreaDaoImpl" parent="baseDao" />
+	<bean id="systemDao" class="com.zzvcom.sysmag.persistence.dao.impl.SubSystemDaoImpl" parent="baseDao" />
+	<bean id="moduleDao" class="com.zzvcom.sysmag.persistence.dao.impl.ModuleDaoImpl" parent="baseDao" />
+	<bean id="operationDao" class="com.zzvcom.sysmag.persistence.dao.impl.OperationDaoImpl" parent="baseDao" />
+	<bean id="userDao" class="com.zzvcom.sysmag.persistence.dao.impl.UserDaoImpl" parent="baseDao" />
+    <bean id="roleDao" class="com.zzvcom.sysmag.persistence.dao.impl.RoleDaoImpl" parent="baseDao" />	
+    <bean id="authorityDao" class="com.zzvcom.sysmag.persistence.dao.impl.AuthorityDaoImpl" parent="baseDao" />
+    <bean id="sysWebserviceCfgDao" class="com.zzvcom.sysmag.persistence.dao.impl.SysWebserviceCfgDaoImpl" parent="baseDao" />
+    <bean id="deployNodeDao" class="com.zzvcom.sysmag.persistence.dao.impl.DeployNodeDaoImpl" parent="baseDao" />
+    <bean id="taskRecorder" class="com.zzvcom.sysmag.persistence.dao.impl.TaskRecorderImpl" parent="baseDao" />
+     <bean id="userLogDao" class="com.zzvcom.sysmag.persistence.dao.impl.UserLogDaoImpl" parent="baseDao" />
+</beans>

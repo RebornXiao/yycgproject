@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		
+		<script type="text/javascript" src="../js/common.js"></script>
+		<style>
+		
+
+
+	
+		</style>
+	</head>
+	<body scroll="auto">
+		<form name="contest" onsubmit="search();"
+			action="/netvideo_p2/admin/stationmanager/getRuleMasterListUI.action"
+			method="post">
+			<table width="100%">
+
+				<TR>
+					<td>
+						<table align="center" width="100%" class="TableForm"
+							cellpadding="3" cellspacing="0">
+							<caption>
+								规则查询
+							</caption>
+							<colgroup>
+								<col width="15%"></col>
+								<col width="55%"></col>
+								<col width="30%"></col>
+							</colgroup>
+							<tr>
+								<td class="labelTd">
+									规则名称
+								</td>
+								<td>
+									<input type="text" name="rulename" maxlength="50" value="" id="rulename"/>
+								</td>
+								<td align="center">
+									<input type="button" class="button" value="[检 索]"onclick="search();">
+									<input class="button" id="resetNote" type="button"value="[重 置]" onclick="resetfrom()">
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<table class="Table" width="70%" cellpadding="3" cellspacing="0"
+							align="center">
+							<tr>
+								<td colspan="6" class="freeBar">
+								<BUTTON id=ext-gen22 class="x-btn-text add" onclick="delCheck();" style="padding-left:0px;">删除删除删除删除删除删除删除删除删除删除</BUTTON>
+								<input type="button" value="删除删除删除删除删除删除删除删除删除删除">
+								</td>
+							</tr>
+							<!-- 表头 -->
+							<caption>
+								规则列表
+							</caption>
+							<!-- 每列所占的比例 -->
+							<colgroup>
+								<col width="4%"></col>
+								<col width="5%"></col>
+
+								<col width="25%"></col>
+								<col width="16%"></col>
+								<col width="20%"></col>
+								<col width="30%"></col>
+							</colgroup>
+							<tr>
+								<td class="head">
+									&nbsp;
+								</td>
+								<td class="head">
+									<input type="checkbox" id="all" name="all" class="checkbox" onclick="checkall(this.checked,this.form)" />
+								</td>
+								<td class="head">
+									规则名称
+								</td>
+								<td class="head">
+									修改时间
+								</td>
+								<td class="head">
+									创建时间
+								</td>
+								<td class="head">
+									备注
+								</td>
+							</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);">
+										<td class="changecol">
+											1
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick=""
+												class="checkbox" value="46">
+										</td>
+										<td class="changecol">
+											迅雷电视剧(仅采一集)
+										</td>
+										<td class="changecol">
+											2009-09-27 17:44:43.0
+										</td>
+										<td class="changecol">
+											2009-09-27 15:01:27.0
+										</td>
+										<td class="changecol">
+											&nbsp;
+										</td>
+									</tr>
+
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);"class="custom">
+										<td class="changecol">
+											2
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="45">
+										</td>
+										<td class="changecol">
+											天线电视剧(只采一集)
+										</td>
+										<td class="changecol">
+											2009-09-27 14:56:28.0
+										</td>
+										<td class="changecol">
+											2009-09-27 14:56:28.0
+										</td>
+										<td class="changecol">
+											&nbsp;
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);">
+										<td class="changecol">
+											3
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="42">
+										</td>
+										<td class="changecol">
+											天线情感
+										</td>
+										<td class="changecol">
+											2009-09-23 15:22:02.0
+										</td>
+										<td class="changecol">
+											2009-09-23 13:05:22.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);"class="custom">
+										<td class="changecol">
+											4
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="41">
+										</td>
+										<td class="changecol">
+											天线汽车
+										</td>
+										<td class="changecol">
+											2009-09-23 15:21:49.0
+										</td>
+										<td class="changecol">
+											2009-09-23 12:58:20.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);">
+										<td class="changecol">
+											5
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="39">
+										</td>
+										<td class="changecol">
+											天线保健
+										</td>
+										<td class="changecol">
+											2009-09-23 15:21:33.0
+										</td>
+										<td class="changecol">
+											2009-09-23 12:53:38.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);"class="custom">
+										<td class="changecol">
+											6
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="38">
+										</td>
+										<td class="changecol">
+											天线旅游
+										</td>
+										<td class="changecol">
+											2009-09-29 10:41:45.0
+										</td>
+										<td class="changecol">
+											2009-09-23 11:43:00.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);">
+										<td class="changecol">
+											7
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick="uncheck(this,this.form)"
+												class="checkbox" value="37">
+										</td>
+										<td class="changecol">
+											天线美食
+										</td>
+
+										<td class="changecol">
+											2009-09-23 15:20:52.0
+										</td>
+										<td class="changecol">
+											2009-09-23 11:33:38.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+
+									</tr>
+								
+
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);"class="custom">
+										<td class="changecol">
+											8
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick=""
+												class="checkbox" value="36">
+										</td>
+										<td class="changecol">
+											天线曲艺
+										</td>
+										<td class="changecol">
+											2009-09-23 15:57:46.0
+										</td>
+										<td class="changecol">
+											2009-09-23 10:46:46.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);">
+										<td class="changecol">
+											9
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick=""
+												class="checkbox" value="35">
+										</td>
+										<td class="changecol">
+											天线纪录片
+										</td>
+										<td class="changecol">
+											2009-09-23 16:05:17.0
+										</td>
+										<td class="changecol">
+											2009-09-23 09:58:14.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+									<tr onmouseover="changecolor(this,1);"onmouseout="changecolor(this,2);"class="custom">
+										<td class="changecol">
+											10
+										</td>
+										<td class="changecol">
+											<input name="checkboxId" type="checkbox" id="checkboxId" onclick=""
+												class="checkbox" value="34">
+										</td>
+										<td class="changecol">
+											天线动漫
+										</td>
+										<td class="changecol">
+											2009-09-29 10:34:25.0
+										</td>
+										<td class="changecol">
+											2009-09-23 09:49:12.0
+										</td>
+										<td class="changecol">
+											李海青
+										</td>
+									</tr>
+							<tr>
+								<td colspan="7" align="right" class="head">
+									页次：1/4  共40条   <SPAN class=grid-sp-c>9</SPAN>&nbsp; <SPAN class=grid-sp-c>3</SPAN> &nbsp;<SPAN class=grid-sp-c onclick='document.forms(0).pageIndex.value=2;document.forms(0).submit();'>4</SPAN>&nbsp;<SPAN class=grid-sp-c onclick='document.forms(0).pageIndex.value=4;document.forms(0).submit();'>:</SPAN>&nbsp 跳转到第<SELECT size=1 name=Pagelist onchange='this.form.pageIndex.value=this.value;this.form.submit();' style=WIDTH: 40px><OPTION value=1 selected>1</OPTION><OPTION value=2>2</OPTION><OPTION value=3>3</OPTION><OPTION value=4>4</OPTION></SELECT>页<INPUT type=hidden  value=1 name="pageIndex" > <INPUT type=hidden  value=10 name="pageSize"> 
+
+								</td>
+							</tr>
+						</table>
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table align="center" width="100%" class="TableForm"
+							cellpadding="3" cellspacing="0">
+							<tr>
+								<td colspan="4" align="center">
+									<input type=button class="button" value="[添 加]"onclick="toAddPage()">
+									<input type=button class="button" value="[修 改]"onclick="toEditPage()">
+									<input type=button class="button" value="[复 制]"onclick="toSaveAsPage()">
+									<input type=button class="button" value="[删 除]"onclick="del();">
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

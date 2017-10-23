@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="User">
+    <sql id="select-all-user">
+		<![CDATA[
+			select t.username   as userName,
+			       t.truename   as trueName,
+			       t.pwd        as password,
+			       t.contact    as contact,
+			       t.addr       as address,
+			       t.email      as email,
+			       t.userstate  as userState,
+			       t.remark     as remark,
+			       t.createtime as createTime,
+			       t.sex        as sex,
+			       t.phone      as phone,
+			       t.movephone  as movePhone,
+			       t.fax        as fax,
+			       t.lastupdate as lastUpdate
+			  from BSS_SYS_USER t
+			 where 1=1       
+		]]>  
+    </sql>
+    <sql id="prefix-total">select count(*) total from (</sql>
+    <sql id="suffix-total">) xx</sql>
+    <sql id="filter-adminuser">
+    <![CDATA[
+         and t.username <> (select t.username from BSS_SYS_USERROLE t where t.roleid = '0' limit 1)
+    ]]>
+    </sql>    
+    <sql id="condition-username">
+        <![CDATA[
+        and t.username in
+               (select distinct ua.username
+                  from BSS_SYS_USERAREA ua
+                 where exists (select 1
+                          from BSS_SYS_USERAREA uaa
+                         where uaa.username = #userName#
+                           and ua.areaid like uaa.areaid || '%'
+                           and ua.areaid <> uaa.areaid))
+        ]]>    
+    </sql>
+    <select id="getUserListForAdminUser" resultClass="user">
+         <include refid="select-all-user"/>
+         <include refid="filter-adminuser"/>
+    </select>
+    <select id="getUserListForAdminUser_count" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-user"/>
+        <include refid="filter-adminuser"/>
+        <include refid="suffix-total"/> 
+    </select>
+    
+    <select id="getUser" parameterClass="string" resultClass="user">
+        <include refid="select-all-user"/>
+        and t.userName = #userName#
+    </select>
+    
+    <select id="getUserListForCommonUser" parameterClass="map" resultClass="user">
+        <include refid="select-all-user"/>
+        <include refid="filter-adminuser"/>
+         <![CDATA[and t.username<>#userName# ]]>
+         and t.username in
+               (select distinct ua.username
+                  from BSS_SYS_USERAREA ua
+        <dynamic prepend="WHERE ">
+            <iterate property="areaList" conjunction="OR" open="(" close=")">
+                   ua.areaid like '$areaList[]$%'
+            </iterate>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <iterate property="areaList" conjunction="AND" open="(" close=")">
+              <![CDATA[ ua.areaid <> '$areaList[]$']]> 
+            </iterate>
+        </dynamic>
+              
+         )
+    </select>
+    <select id="getUserListForCommonUser_count" parameterClass="map" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-user"/>
+        <include refid="filter-adminuser"/>
+        and t.username in
+               (select distinct ua.username
+                  from BSS_SYS_USERAREA ua
+        <dynamic prepend="WHERE ">
+            <iterate property="areaList" conjunction="OR" open="(" close=")">
+                   ua.areaid like '$areaList[]$%'
+            </iterate>
+        </dynamic>
+        <dynamic prepend="AND">
+            <iterate property="areaList" conjunction="AND" open="(" close=")">
+              <![CDATA[ ua.areaid <> '$areaList[]$']]> 
+            </iterate>
+        </dynamic>        
+         )
+        <include refid="suffix-total"/>
+    </select>
+    
+    
+    <!-- ########################插入用户记录##################### -->
+    <insert id="insertUser" parameterClass="user">
+		insert into BSS_SYS_USER
+		  (username, truename, pwd, contact, addr, email, userstate, 
+		  remark, createtime, sex, phone, movephone, fax, lastupdate)
+		values
+		  (#userName#, #trueName#, #password#, #contact#, #address#, #email#, #userState#, 
+		  #remark#, #createTime#, #sex#, #phone#, #movePhone#, #fax#, #lastUpdate#)
+    </insert>
+    <!-- ########################更新用户记录##################### -->
+    <update id="updateUser" parameterClass="user">
+		update BSS_SYS_USER
+		   set truename   = #trueName#,
+		       <dynamic>
+		          <isNotEmpty property="password">
+		          pwd= #password#,
+		          </isNotEmpty>
+		       </dynamic>
+		       contact    = #contact#,
+		       addr       = #address#,
+		       email      = #email#,
+		       userstate  = #userState#,
+		       remark     = #remark#,
+		        <!--createtime = #createTime#,-->
+		       sex        = #sex#,
+		       phone      = #phone#,
+		       movephone  = #movePhone#,
+		       fax        = #fax#,
+		       lastupdate = #lastUpdate#
+		 where username = #userName#
+    </update>
+    <!--#####################删除用户的区域关联记录#####################-->
+    <delete id="deleteUser" parameterClass="string">
+        delete from BSS_SYS_USER where username = #userName#
+    </delete>
+    
+    <!--#####################添加用户的区域关联记录#####################-->
+    <insert id="insertUserArea" parameterClass="map">
+		insert into BSS_SYS_USERAREA
+		  (username, areaid)
+		values
+		  (#userName#, #areaId#)
+    </insert>
+    <!--#####################删除用户的区域关联记录#####################-->
+    <delete id="deleteUserArea" parameterClass="string">
+        delete from BSS_SYS_USERAREA where username = #userName#
+    </delete>
+    
+    <!--#####################添加用户的业务关联记录#####################-->
+    <insert id="insertUserBusiness" parameterClass="map">
+		insert into BSS_SYS_USERBUSINESS
+		  (username, bussid)
+		values
+		  (#userName#, #businessId#)
+    </insert>
+    <!--#####################删除用户的业务关联记录#####################-->
+    <delete id="deleteUserBusiness" parameterClass="string">
+        delete from BSS_SYS_USERBUSINESS where username = #userName#
+    </delete>
+    
+    <!--#####################添加用户的角色关联记录#####################-->
+    <insert id="insertUserRole" parameterClass="map">
+        insert into BSS_SYS_USERROLE
+          (username, roleid)
+        values
+          (#userName#, #roleId#)
+    </insert>
+    <!--#####################删除用户的角色关联记录#####################-->
+    <delete id="deleteUserRole" parameterClass="string">
+        delete from BSS_SYS_USERROLE where username = #userName#
+    </delete>    
+     
+</sqlMap>
+

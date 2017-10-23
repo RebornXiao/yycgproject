@@ -1,0 +1,15 @@
+{
+   "menus" : [{"icon" : "icon-sys","menuid" : "1","menuname" : "系统管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "用户管理","url" : "/yycgproject/user/userquery.action"
+                 }] 
+               },
+               {"icon" : "icon-sys","menuid" : "1","menuname" : "第三方系统","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "模块管理","url" : "/yycgproject/sysconfig/modulelist.action"
+                 },
+                  {"icon" : "icon-log","menuid" : "1_1","menuname" : "角色管理","url" : "/yycgproject/sysconfig/rolelist.action"
+                 },
+                  {"icon" : "icon-log","menuid" : "1_1","menuname" : "系统参数配置管理","url" : "/yycgproject/sysconfig/basicinfo.action"
+                 }]
+               }
+             ]
+}

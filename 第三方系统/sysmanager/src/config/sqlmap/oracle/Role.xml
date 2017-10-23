@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Role">
+    <sql id="select-all-role">
+		<![CDATA[
+			select t.roleid     as   roleId, 
+			       t.rolename   as   roleName, 
+			       t.roledes    as   roleDes
+			  from bss_sys_role t
+			 where 1=1
+		]]>       
+    </sql>
+    <sql id="prefix-total">select count(*) total from (</sql>
+    <sql id="suffix-total">)</sql>    
+    <sql id="filter-root">
+	    <![CDATA[
+	        and t.roleid <> '0'
+	    ]]>     
+    </sql>
+    <sql id="condition-username-controll">
+        <![CDATA[
+		 and t.roleid in
+		       (select t.roleid
+		          from bss_sys_rolearea t
+		         where exists (select 1
+		                  from bss_sys_userarea ua
+		                 where ua.username = #userName#
+		                   and t.areaid like ua.areaid || '%'))
+        ]]>    
+    </sql>
+    <select id="getAllRoleList" resultClass="role">
+         <include refid="select-all-role"/>
+         <include refid="filter-root"/>
+    </select>
+    <select id="getAllRoleList_count" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-role"/>
+        <include refid="filter-root"/>
+        <include refid="suffix-total"/>
+    </select>
+    
+    <select id="getUserAreaList" parameterClass="string" resultClass="String">
+        select ua.areaid from BSS_SYS_USERAREA ua where ua.username = #userName#
+    </select>
+    
+    <select id="getUserControlRoleList" parameterClass="map" resultClass="role">
+        <include refid="select-all-role"/>
+        <include refid="filter-root"/>
+         <!-- and t.roleid in
+          (select tt.roleid
+             from BSS_SYS_ROLEAREA tt
+             WHERE 1=1
+            <dynamic prepend="and">
+                <iterate property="areaList" conjunction="OR" open="(" close=")">
+                   tt.areaid like '$areaList[]$%'
+                </iterate>
+            </dynamic>
+            <dynamic prepend="and">
+                <iterate property="areaList" conjunction="AND" open="(" close=")">
+                  <![CDATA[ tt.areaid <> '$areaList[]$']]> 
+                </iterate>
+            </dynamic>
+           ) -->
+    </select>
+    <select id="getUserControlRoleList_count" parameterClass="map" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-role"/>
+        <include refid="filter-root"/>
+         <!-- and t.roleid in
+          (select tt.roleid
+             from BSS_SYS_ROLEAREA tt
+             WHERE 1=1
+            <dynamic prepend="and">
+                <iterate property="areaList" conjunction="OR" open="(" close=")">
+                   tt.areaid like '$areaList[]$%'
+                </iterate>
+            </dynamic>
+            <dynamic prepend="and">
+                <iterate property="areaList" conjunction="AND" open="(" close=")">
+                  <![CDATA[ tt.areaid <> '$areaList[]$']]> 
+                </iterate>
+            </dynamic>
+           ) -->
+        <include refid="suffix-total"/>
+    </select>
+    
+    <select id="getUserRole" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.roleid = (select ur.roleid from bss_sys_userrole ur where ur.username = #userName#)
+    </select>
+    <select id="getRoleById" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.roleid = #roleId#
+    </select>
+    <select id="getRoleByName" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.rolename = #roleName#
+    </select>
+    
+    <select id="getUserUsingRoleList" parameterClass="string" resultClass="role">
+        select t.roleid as roleId from bss_sys_userrole t where t.roleid = #roleId#
+    </select>
+    
+    <insert id="insertRole">
+        <selectKey resultClass="string" keyProperty="roleId">
+            select sys_guid() AS roleId FROM DUAL
+        </selectKey>
+		insert into bss_sys_role
+		  (roleid, rolename, roledes)
+		values
+		  (#roleId#, #roleName#, #roleDes#)
+    </insert>
+    <update id="updateRole" parameterClass="role">
+		update bss_sys_role
+		   set rolename = #roleName#, roledes = #roleDes#
+		 where roleid = #roleId#
+    </update>
+    <delete id="deleteRole" parameterClass="string">
+        delete from bss_sys_role where roleid = #roleId#
+    </delete>
+    
+    <insert id="insertRoleArea" parameterClass="map">
+		insert into bss_sys_rolearea (roleid, areaid) values (#roleId#, #areaId#)
+    </insert>
+    <delete id="deleteRoleArea" parameterClass="string">
+        delete from bss_sys_rolearea where roleid = #roleId#
+    </delete>
+</sqlMap>
+

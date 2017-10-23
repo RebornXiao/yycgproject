@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Role">
+    <sql id="select-all-role">
+		<![CDATA[
+			select t.roleid     as   roleId, 
+			       t.rolename   as   roleName, 
+			       t.roledes    as   roleDes,
+			       t.vchar1     as   createUserName 
+			  from BSS_SYS_ROLE t
+			 where 1=1
+		]]>       
+    </sql>
+    <sql id="prefix-total">select count(*) total from (</sql>
+    <sql id="suffix-total">) xx</sql>    
+    <sql id="filter-root">
+	    <![CDATA[
+	        and t.roleid <> '0'
+	    ]]>     
+    </sql>
+    <select id="getAllRoleList" resultClass="role">
+         <include refid="select-all-role"/>
+         <include refid="filter-root"/>
+    </select>
+    <select id="getAllRoleList_count" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-role"/>
+        <include refid="filter-root"/>
+        <include refid="suffix-total"/>
+    </select>
+
+    <select id="getUserAreaList" parameterClass="string" resultClass="String">
+        select ua.areaid from BSS_SYS_USERAREA ua where ua.username = #userName#
+    </select>
+    
+    <select id="getAddOrEditRoleList" parameterClass="map" resultClass="role">
+        <include refid="select-all-role"/>
+        <isNotEmpty property="cmd">
+               <isEqual property="cmd" compareValue="add">
+               		and t.vchar1 = #userName#
+               	</isEqual>
+               <isEqual property="cmd" compareValue="edit">
+               		and ((t.roleid = (select roleid from BSS_SYS_USERROLE where username = #editUser#)) or (t.vchar1 = #userName#))
+               	</isEqual>
+        </isNotEmpty>
+		and exists (select 1 from BSS_SYS_ROLESYS where roleid = t.ROLEID)
+    </select>
+    
+    <select id="getUserControlRoleList" parameterClass="map" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.vchar1 = #userName#
+    </select>
+    
+    <select id="getUserControlRoleList_count" parameterClass="map" resultClass="int">
+        <include refid="prefix-total"/>
+        <include refid="select-all-role"/>
+        and t.vchar1 = #userName#
+        <include refid="suffix-total"/>
+    </select>
+    
+    <select id="getUserRole" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.roleid = (select ur.roleid from BSS_SYS_USERROLE ur where ur.username = #userName#)
+    </select>
+    <select id="getRoleById" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.roleid = #roleId#
+    </select>
+    <select id="getRoleByName" parameterClass="string" resultClass="role">
+        <include refid="select-all-role"/>
+        and t.rolename = #roleName#
+    </select>
+    
+    <select id="getUserUsingRoleList" parameterClass="string" resultClass="role">
+        select t.roleid as roleId from BSS_SYS_USERROLE t where t.roleid = #roleId#
+    </select>
+    
+    <insert id="insertRole">
+		insert into BSS_SYS_ROLE
+		  (rolename, roledes, vchar1)
+		values
+		  (#roleName#, #roleDes#,#createUserName#)
+    </insert>
+    <update id="updateRole" parameterClass="role">
+		update BSS_SYS_ROLE
+		   set rolename = #roleName#, roledes = #roleDes#
+		 where roleid = #roleId#
+    </update>
+    <delete id="deleteRole" parameterClass="string">
+        delete from BSS_SYS_ROLE where roleid = #roleId#
+    </delete>
+    
+    <insert id="insertRoleArea" parameterClass="map">
+		insert into BSS_SYS_ROLEAREA (roleid, areaid) values (#roleId#, #areaId#)
+    </insert>
+    <delete id="deleteRoleArea" parameterClass="string">
+        delete from BSS_SYS_ROLEAREA where roleid = #roleId#
+    </delete>
+    
+    
+    <select id="getRolesysid" parameterClass="string" resultClass="string">
+       select rsid from BSS_SYS_ROLESYS where roleid = #roleId#
+    </select>
+    
+</sqlMap>
+

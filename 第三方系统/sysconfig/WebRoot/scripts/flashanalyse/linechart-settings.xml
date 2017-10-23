@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<data_type>xml</data_type>
+	<reload_data_interval>3</reload_data_interval>
+	<add_time_stamp>true</add_time_stamp>
+	<digits_after_decimal>2</digits_after_decimal>
+
+	<background>
+		<color>000000</color>
+		<alpha>80</alpha>
+		<border_color>00CC00</border_color>
+		<border_alpha>60</border_alpha>
+		<file>1</file>
+	</background>
+	<plot_area>
+		<color>000000</color>
+		<alpha>100</alpha>
+		<border_color>00FF00</border_color>
+		<margins>
+			<top>30</top>
+			<left>50</left>
+			<right>30</right>
+			<bottom>40</bottom>
+		</margins>
+	</plot_area>
+	<grid>
+		<x>
+			<color>006600</color>
+			<alpha>100</alpha>
+			<approx_count>5</approx_count>
+		</x>
+		<y_left>
+			<color>006600</color>
+			<alpha>100</alpha>
+			<fill_color>00CC66</fill_color>
+		</y_left>
+	</grid>
+
+	<axes>
+		<x>
+			<width>1</width>
+			<color>000000</color>
+		</x>
+		<y_left>
+			<width>1</width>
+			<color>000000</color>
+		</y_left>
+	</axes>
+
+	<values>
+		<x>
+			<skip_first>true</skip_first>
+			<skip_last>false</skip_last>
+			<color>00FF00</color>
+			<frequency>1</frequency>
+		</x>
+		<y_left>
+			<min></min>
+			<max></max>
+			<unit></unit>
+			<color>33FF00</color>
+			<unit_position>right</unit_position>
+			<inside>false</inside>
+			<skip_last>true</skip_last>
+		</y_left>
+	</values>
+
+	<indicator>
+		<zoomable>false</zoomable>
+		<color>92C7E7</color>
+		<x_balloon_text_color>FFFFFF</x_balloon_text_color>
+		<y_balloon_on_off>false</y_balloon_on_off>
+	</indicator>
+
+	<legend>
+		<enabled>true</enabled>
+		<text_color>33FF00</text_color>
+	</legend>
+
+	<graphs>
+		<graph gid="0">
+			<color>#FF0000</color>
+		</graph>
+		<graph gid="1">
+			<color>#00FF00</color>
+		</graph>
+		<graph gid="2">
+			<color>#0000FF</color>
+		</graph>
+		<graph gid="3">
+			<color>#FF00FF</color>
+		</graph>
+		<graph gid="4">
+			<color>#00FFFF</color>
+		</graph>
+		<graph gid="5">
+			<color>#8E2323</color>
+		</graph>
+		<graph gid="6">
+			<color>#70DB93</color>
+		</graph>
+		<graph gid="7">
+			<color>#215E21</color>
+		</graph>
+		<graph gid="8">
+			<color>#D19275</color>
+		</graph>
+		<graph gid="9">
+			<color>#9F5F9F</color>
+		</graph>
+		<graph gid="10">
+			<color>#DB7093</color>
+		</graph>
+		<graph gid="11">
+			<color>#FF7F00</color>
+		</graph>
+		<graph gid="12">
+			<color>#EAADEA</color>
+		</graph>
+		<graph gid="13">
+			<color>#236B8E</color>
+		</graph>
+		<graph gid="14">
+			<color>#5959AB</color>
+		</graph>
+	</graphs>
+
+</settings>

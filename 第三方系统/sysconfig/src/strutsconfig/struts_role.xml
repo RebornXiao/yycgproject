@@ -1,0 +1,113 @@
+<!DOCTYPE struts PUBLIC       
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin.role" extends="mydefault"
+		namespace="/admin/role">
+		<!-- 进入角色管理页面 -->
+		<action name="getRoleUI" class="zzvcom.sys.action.RoleAction"
+			method="getRoleUI">
+			<result name="success">/admin/Role_list.jsp</result>
+		</action>
+		<!-- 检索角色信息 -->
+		<action name="getRoleSearch"
+			class="zzvcom.sys.action.RoleAction" method="getRoleSearch">
+			<result name="success" type="chain">getRoleUI</result>
+		</action>
+		<!-- 进入角色权限配置 -->
+		<action name="getRollPermissionUI"
+			class="zzvcom.sys.action.RoleAction" method="getRollPermissionUI">
+			<result name="success">/admin/Role_Permission.jsp</result>
+		</action>
+		<action name="getAllPermissionTree"
+			class="zzvcom.sys.action.RoleAction" method="getAllPermissionTree">
+			<result name="success">
+				/admin/Role_Permission_Left.jsp
+			</result>
+		</action>
+		<action name="getPermissionTree"
+			class="zzvcom.sys.action.RoleAction" method="getPermissionTree">
+			<result name="success">
+				/admin/Role_Permission_Right.jsp
+			</result>
+		</action>
+		<action name="roleEditCheck" class="zzvcom.sys.action.RoleAction"
+			method="roleEditCheck">
+		</action>
+		<action name="roleDeleteCheck" class="zzvcom.sys.action.RoleAction"
+			method="roleDeleteCheck">
+		</action>
+		<action name="saveOrUpdatePermissions"
+			class="zzvcom.sys.action.RoleAction"
+			method="saveOrUpdatePermissions">
+			<result name="success">/admin/Role_Back.jsp</result>
+		</action>
+
+		<!-- 到新增或修改页面 -->
+		<action name="toSaveOrUpdateRolePage"
+			class="zzvcom.sys.action.RoleAction"
+			method="toSaveOrUpdateRolePage">
+			<result name="success">/admin/Role_AddOrEdit.jsp</result>
+		</action>
+		<!-- 保存角色 -->
+		<action name="saveRole" class="zzvcom.sys.action.RoleAction"
+			method="saveRole">
+			<result name="input">/admin/Role_AddOrEdit.jsp</result>
+		</action>
+		<!-- 删除角色 -->
+		<action name="deleteRole" class="zzvcom.sys.action.RoleAction"
+			method="deleteRole">
+			<result name="success" type="chain">getRoleUI</result>
+		</action>
+		<!-- 修改角色 -->
+		<action name="updateRole" class="zzvcom.sys.action.RoleAction"
+			method="updateRole">
+			<result name="input">/admin/Role_AddOrEdit.jsp</result>
+		</action>
+		<!-- 修改用户权限 -->
+		<action name="updateUserPermissions" class="zzvcom.sys.action.RoleAction"
+			method="updateUserPermissions">
+			<result name="input">/admin/User_Permissions.jsp</result>
+		</action>
+		
+		<!-- 根据平台获取角色 -->
+		<action name="getPlatModule" class="zzvcom.sys.action.RoleAction"
+			method="getPlatModule">
+			<result name="success">/admin/Role_Per.jsp</result>
+		</action>
+		<!-- 根据用户获取角色 -->
+		<action name="getPlatUserModule" class="zzvcom.sys.action.RoleAction"
+			method="getPlatUserModule">
+			<result name="success">/admin/Role_Per.jsp</result>
+		</action>
+	</package>
+	<!-- 用户权限配置 -->
+	<package name="admin.user" extends="mydefault"
+		namespace="/admin/user">
+		<action name="getUserPermissionUI"
+			class="zzvcom.sys.action.UserPermissionAction"
+			method="getUserPermissionUI">
+			<result name="success">/admin/User_Permission.jsp</result>
+		</action>
+		<action name="getAllPermissionTree"
+			class="zzvcom.sys.action.UserPermissionAction"
+			method="getAllPermissionTree">
+			<result name="success">
+				/admin/User_Permission_Left.jsp
+			</result>
+		</action>
+		<action name="getPermissionTree"
+			class="zzvcom.sys.action.UserPermissionAction"
+			method="getPermissionTree">
+			<result name="success">
+				/admin/User_Permission_Right.jsp
+			</result>
+		</action>
+		<action name="saveOrUpdatePermissions"
+			class="zzvcom.sys.action.UserPermissionAction"
+			method="saveOrUpdatePermissions">
+			<result name="success">/admin/Role_Back.jsp</result>
+		</action>
+	</package>
+</struts>
+

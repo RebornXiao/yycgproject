@@ -1,0 +1,28 @@
+jdbc.maximumConnectionCount=100
+jdbc.maximumActiveTime=90000
+jdbc.minimumConnectionCount=2
+jdbc.houseKeepingSleepTime=90000
+jdbc.prototypeCount=2
+jdbc.trace=true
+jdbc.verbose=true
+jdbc.key=123456789012345678901234
+
+#####################
+# MySQL 5 localhost #
+#####################
+jdbc.dialect=org.hibernate.dialect.MySQL5Dialect
+jdbc.driver=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://192.168.151.240:3306/sysmanager?useUnicode=true&characterEncoding=utf-8
+jdbc.url=jdbc\:oracle\:thin\:@192.168.104.164\:1521\:orcl
+jdbc.username=root
+jdbc.password=6c8a577a07555f87570cbac2804d054a
+#jdbc.username=bfad342ae08b3417
+#jdbc.password=eba65cd2fba63c479835c1d80f8be027
+##########
+# Oracle #
+##########
+#jdbc.dialect=org.hibernate.dialect.Oracle10gDialect
+#jdbc.driver=oracle.jdbc.driver.OracleDriver
+#jdbc.url=jdbc:oracle:thin:@192.168.104.163:1521:orcl
+#jdbc.username=afd3438c6f708499b344ae0bfdbe7814
+#jdbc.password=afd3438c6f708499b344ae0bfdbe7814

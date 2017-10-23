@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <settings cacheModelsEnabled="true" enhancementEnabled="true"
+              lazyLoadingEnabled="true" errorTracingEnabled="true"
+              useStatementNamespaces="true"/>
+	<!-- mysql
+	
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/VcomUser.xml"/>
+    <sqlMap resource="zzvcom/log/pojo/sqlmap_mysql/VcomLog.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/VcomRole.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/VcomOperation.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/VcomModule.xml"/>
+    
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/dictinfo_SqlMap.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/dicttype_SqlMap.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_mysql/basicinfo_SqlMap.xml"/>
+    -->
+    <!-- end -->
+    <!-- oracle -->
+   
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/VcomUser.xml"/>
+    <sqlMap resource="zzvcom/log/pojo/sqlmap_oracle/VcomLog.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/VcomRole.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/VcomOperation.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/VcomModule.xml"/>
+    
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/dictinfo_SqlMap.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/dicttype_SqlMap.xml"/>
+    <sqlMap resource="zzvcom/sys/pojo/sqlmap_oracle/basicinfo_SqlMap.xml"/>
+ 	
+    <!-- end -->
+</sqlMapConfig>

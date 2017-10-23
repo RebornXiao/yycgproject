@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    
+    <title>My JSP 'css.jsp' starting page</title>
+    
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="vcomframe/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="vcomframe/css/common.css" />
+		<link rel="stylesheet" id="ext-all-css" type="text/css" href="vcomframe/ext/resources/css/ext-all.css" />
+  </head>
+  <body>
+  <div id="loading-mask"></div>
+		<div id="loading">
+			<div class="loading-indicator">
+				<img src="vcomframe/images/extanim32.gif" width="32" height="32"
+					style="margin-right:8px;" align="absmiddle" />
+				页面加载中，请稍后...
+			</div>
+		</div>
+		<script type="text/javascript" src="vcomframe/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="vcomframe/ext/ext-all.js"></script>
+	    <script type="text/javascript" src="vcomframe/ext/windows.js"></script>
+	    <script type="text/javascript" src="vcomframe/ext/ComboBox.js"></script>
+		<table width="100%">
+			<tr>
+				<TD>
+					<form name="testform">
+					<table align="center" class="TableForm" cellpadding="3" cellspacing="0">
+						<caption>文章内容</caption>
+						<colgroup>
+							<col width="15%"></col>
+							<col width="35%"></col>
+							<col width="15%"></col>
+							<col width="35%"></col>
+						</colgroup>
+						
+						<tr>
+							<td class="labelTd">分页select</td>
+							<td>
+								<div id='pagepercent'></div>
+							</td>
+							<td class="labelTd">不分页select</td>
+							<td>
+								<div id='nopagepercent'></div>
+							</td>
+						</tr>
+						<tr>
+							<td class="labelTd">拼音检索</td>
+							<td>
+								<div id='pagepercent1'></div>
+							</td>
+							<td class="labelTd">带树</td>
+							<td>
+								<div id='nopagepercent1'></div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center">
+							<input type="button" class="button" value="[取 VALUE]" onclick="getvalue();">
+							<input class="button" type="button" value="[取 TEXT]" onclick="gettext();">
+							<input class="button" type="button" value="[设定值]" onclick="setvalue();">
+							</td>
+						</tr>
+					</table>
+					</form>
+				</TD>
+			</tr>
+			
+		</table>
+  </body>
+</html>
+<script>
+	var value=[{value:"0", text:"25%"},
+			{value:"1", text:"河南"}, 
+			{value:"2", text:"郑州"},
+			{value:"3", text:"南阳"},
+			{value:"4", text:"洛阳"},
+			{value:"5", text:"luoyang"},
+			{value:"6", text:"zhengzhou"},
+			{value:"7", text:"28%"}, 
+			{value:"8", text:"29%"}, 
+			{value:"9", text:"30%"}, 
+			{value:"10", text:"31%"},
+			{value:"11", text:"32%"},
+			{value:"12", text:"34%"},
+			{value:"13", text:"35%"},
+			{value:"14", text:"36%"},
+			{value:"15", text:"37%"},
+			{value:"16", text:"33%"}];
+	var combobox1=new combobox("pagepercent","完成状态1",value,"combobox1",270,150,4,true,"7");
+	
+	function getvalue(){
+		var value=treecombobox.getValue();
+		alert(value);
+	}
+	function gettext(){
+		var text=treecombobox.getText();
+		alert(text);
+	}
+	function setvalue(){
+		combobox1.setValues("7");
+	}
+	var value2=[{value:"1", text:"125%"},{value:"2", text:"126%"}, {value:"3", text:"127%"},{value:"4", text:"128%"}, {value:"5", text:"129%"}, {value:"6", text:"130%"}, {value:"7", text:"131%"},{value:"8", text:"132%"},{value:"9", text:"133%"}];
+	var combobox2=new combobox("nopagepercent","完成状态2",value2,"combobox2",270,200,null,true,"7");
+	var value3=[{value:'1',text:'河南',pinyin:'henan'},
+				{value:'2',text:'南阳',pinyin:'nanyang'},
+				{value:'3',text:'河北',pinyin:'hebei'},
+				{value:'4',text:'信阳',pinyin:'xinyang'},
+				{value:'5',text:'商丘',pinyin:'shangqiu'}
+				];
+	var activebox1=new activecombobox("pagepercent1","省份",270,150,5,"ComboBox.action",value3);
+	var treejson= [{text:"信息中心",icon:"vcomframe\/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:1,children:[{text:"右键菜单",href:"rightmenu.html",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:25,children:[]},{text:"grid数据显示方式二",href:"articleGridManage1.action",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:1,leaf:true,draggable:false,id:26,children:[]},{text:"样式文件",href:"css.jsp",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:1,leaf:true,draggable:false,id:6,children:[]},{text:"ext数据表格",href:"articleGridManage.action",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:1,leaf:true,draggable:false,id:5,children:[]},{text:"信息征集",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:1,leaf:false,draggable:false,id:4,children:[{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:23,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:22,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:21,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:20,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:19,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:17,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:16,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:15,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:14,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:13,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:12,children:[]},{text:"异步加载测试",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:11,children:[]},{text:"信息文章列表",href:"articleManage.action",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:8,children:[]},{text:"发布信息文章",href:"addarticle.html",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:4,leaf:true,draggable:false,id:7,children:[]}]}]},{text:"系统应用",icon:"vcomframe\/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:2,children:[{text:"系统帮助",href:"http:\/\/www.baidu.com",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:2,leaf:false,draggable:false,id:9,children:[{text:"系统帮助",icon:"vcomframe\/images\/im2.gif",depth:3,parentid:9,leaf:true,draggable:false,id:24,children:[]}]}]},{text:"系统设置",icon:"vcomframe\/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:3,children:[{text:"设置帮助",href:"http:\/\/www.baidu.com",icon:"vcomframe\/images\/im2.gif",depth:2,parentid:3,leaf:true,draggable:false,id:10,children:[]}]}]
+	var treecombobox=new treecombobox("nopagepercent1","省份",270,250,treejson,null,{value:'2',text:'信阳'});
+</script>

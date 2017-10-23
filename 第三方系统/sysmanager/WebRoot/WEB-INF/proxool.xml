@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxool-config>
+	<proxool>
+		<alias>jwxt_common</alias>
+		<driver-url>jdbc:oracle:thin:@127.0.0.1:1521:yycg</driver-url>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+		<driver-properties>
+			<property name="user" value="yycg" />
+			<property name="password" value="yycg" />
+		</driver-properties>
+		<house-keeping-sleep-time>90000</house-keeping-sleep-time>
+		<maximum-new-connections>5000</maximum-new-connections>
+		<prototype-count>1</prototype-count>
+		<minimum-connection-count>1</minimum-connection-count>
+		<maximum-connection-count>3</maximum-connection-count>
+		 <maximum-connection-lifetime>36000000</maximum-connection-lifetime>
+		<maximum-active-time>3000000</maximum-active-time>
+		<house-keeping-test-sql>select CURRENT_DATE from dual</house-keeping-test-sql>
+	</proxool>
+</proxool-config>

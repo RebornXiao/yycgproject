@@ -1,0 +1,398 @@
+/*
+		form区样式表
+		AUTHOR:刘志强
+		DATE:2008-7-18
+		email：liuzhiqiang@zzvcom.com
+	*/
+	*{margin:0px;padding:0px;font-size:12px}
+	/*公共样式*/
+	body {margin:2 2 2 2;padding:0px}
+	/*外层容器,页面所有内容都应该放置在此容器中，内部所有元素宽度设为100%*/
+	#container{width:950px;margin:0 auto;text-align:left}	
+	.alignLeft{text-align:left;}	/*左对齐，combo组件使用*/
+	
+	/*星号*/
+	.star {color:#f00}
+	/*外层表格，定义上下间距及宽度*/
+	.outerTable{width:100%;margin-top:5px}
+	/*表格外边框*/
+	.TableForm {
+		border-left:1px solid #B8CFEE;
+		border-top:1px solid #B8CFEE;
+		width:100%;
+		margin-top:0px;
+	 }
+	 .Table {
+		border-left:0px solid #B8CFEE;
+		border-top:0px solid #B8CFEE;
+		width:100%;
+		margin-top:0px;
+	 }
+	 .Table td {
+		border-right:0px solid #B8CFEE;
+		border-bottom:0px solid #B8CFEE;
+		font-size:12px;	/*字体大小*/
+	}
+	 /*表格标题*/
+	.TableForm caption {
+		height: 25px; line-height: 25px;	/*高度25px*/
+		text-align: left; /*对齐方式:居中对齐*/
+		font-size: 12px; font-weight: bold;	color:#15428B;/*字体样式:14像素 粗体*/
+		padding-left: 5px; /*左边距10px*/
+
+		border-left:1px solid #B8CFEE;	/*边框*/
+		border-right:1px solid #B8CFEE;	/*边框*/
+		background: url(vcomframe/images/top-bottom.gif);/*背景*/
+	}
+	 /*每个单元格*/
+	.TableForm td {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		line-height: 22px;
+		padding:5 20px 5 10px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.div{
+		border-left:0px solid #ffffff;
+		border-top:0px solid #ffffff;
+		width: 100%
+	}
+	.div table{
+		border-left:0px solid #B8CFEE;
+		border-top:0px solid #B8CFEE;
+		width:auto;
+		margin-top:0px;
+	}
+	.div td{
+		border-right:0px solid #B8CFEE;
+		border-bottom:0px solid #B8CFEE;
+		height:auto;
+		padding:0;	
+		font-size:12px;	/*字体大小*/
+	}
+	.div input{
+	
+	}
+	.tdpic{
+		position:absolute;
+		margin-top: 4px;
+		margin-left: 2px;
+	}
+	.tdpicselect{
+		position:absolute;
+		margin-top: 4px;
+		margin-left: 20px;
+	}
+	.cap{
+		float: right;
+		padding-right: 5px;
+		padding-top: 5px;
+		cursor: pointer;
+	}
+	/*每个单元格*/
+	.TableForm td.tdcustom {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		padding:0 10px 0 10px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.TableForm td.head {
+		height:25px;line-height:25px;	/*高度*/
+		padding:5 20px 5 10px;	/*左右内边距10px*/
+		background: url(vcomframe/images/grid3-hrow-over.gif); /*背景样式*/
+	}
+	.TableForm td.tdfree {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		padding:0 1px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	/*输入标签单元格*/
+	.labelTd {
+		text-align: right; /*右对齐*/
+		word-break: keep-all;/*必须*/
+	}
+	/*所有输入框样式,通过js将radio和checkbox的边框去掉*/
+	.TableForm input{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background: url(vcomframe/images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 100%; /*表单域宽度*/
+		max-width: 100%; 
+		font-size:12px; /*表单域字体*/
+
+	}
+	.TableForm textarea{
+		border: 1px solid #B8CFEE;	/*边框*/
+		background: url(vcomframe/images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 100%; /*表单域宽度*/
+		max-width: 100%; 
+		font-size:12px; /*表单域字体*/
+
+	}
+	.TableForm input.custom50{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background: url(vcomframe/images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 49%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+
+	}
+	.TableForm input.custom10{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background: url(vcomframe/images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 10%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+
+	}
+	.add {
+		background-image:url(vcomframe/images/add.gif) !important;
+	}
+	.modify {
+		background-image:url(vcomframe/images/plugin.gif) !important;
+	}
+	.delete {
+		background-image:url(vcomframe/images/delete.gif) !important;
+	}
+	/*出错样式定义*/
+	.TableForm input.form-invalid,textarea.form-invalid{background:#fff url(vcomframe/images/invalid_line.gif) repeat-x bottom;border:1px solid #dd7870;}
+	/*出错样式定义*/
+	.errstyle{	
+		background:#fff url(vcomframe/images/drop-no.gif) no-repeat right;	
+	}
+	.successstyle{
+		background:#fff url(vcomframe/images/drop-yes.gif) no-repeat right;
+	}
+	.TableForm input.select{
+		padding:0 10px 0 30px;	/*左右内边距10px*/
+		text-align:left;
+	}
+	/*定义日期控件样式*/
+	.TableForm input.Wdate{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background:#fff url(vcomframe/images/datePicker.gif) no-repeat right;
+		width: 100%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+	}
+	/*定义查找控件样式*/
+	.TableForm input.Search{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background:#fff url(vcomframe/images/search.gif) no-repeat right;
+		width: 100%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+	}
+	/*定义单选框按钮样式*/
+	.TableForm input.radio1{
+		border: 0px solid #B8CFEE;	/*边框*/
+		background: url() no-repeat 0 0; /*背景样式*/
+		width: 18px; /*表单域宽度*/
+		cursor: hand;
+	}
+	/*定义单选框按钮样式[没有样式]*/
+	.TableForm input.radio{
+		width: 18px; /*表单域宽度*/
+		cursor: hand;
+	}
+	/*定义单选框按钮样式*/
+	.TableForm input.checkbox{
+		width: 18px; /*表单域宽度*/
+	}
+	/*定义select样式*/
+	.TableForm select{
+		width: 100%; /*表单域宽度*/
+	}
+	/*按钮(两个字)*/
+	.TableForm .button{
+		width:auto;border:0px outset #B8CFEE;
+		height:22px;line-height:20px;width: 61px;
+		background: url(vcomframe/images/button.gif) no-repeat 0 0; /*背景样式*/
+		cursor: pointer;
+		
+	}
+	/*按钮(四个字)*/
+	.TableForm .longbutton{
+		width:auto;border:0px outset #B8CFEE;
+		height:22px;line-height:20px;width: 90px;
+		background: url(vcomframe/images/button-long.gif) no-repeat 0 0; /*背景样式*/
+		cursor: pointer;
+		
+	}
+	/*按钮(四个字)*/
+	.TableForm .longbutton{
+		width:auto;border:0px outset #B8CFEE;
+		height:22px;line-height:20px;width: 90px;
+		background: url(vcomframe/images/button-long.gif) no-repeat 0 0; /*背景样式*/
+		cursor: pointer;
+	}
+	.Table {
+		border-left:1px solid #B8CFEE;
+		border-top:1px solid #B8CFEE;
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		width:100%;
+		margin-top:2px;
+	 }
+	 /*表格标题*/
+	 
+	.Table caption {
+		height: 25px; line-height: 25px;	/*高度25px*/
+		text-align: left; /*对齐方式:居中对齐*/
+		font-size: 12px; font-weight: bold;	color:#15428B;/*字体样式:14像素 粗体*/
+		padding-left: 5px; /*左边距10px*/
+		border-left:1px solid #B8CFEE;	/*边框*/
+		border-right:1px solid #B8CFEE;	/*边框*/
+		background: url(vcomframe/images/top-bottom.gif);/*背景*/
+	}
+	 
+	.Table td {
+		border-right:1px solid #DDDDDD;
+		border-bottom:1px solid #DDDDDD;
+		height:auto;
+		padding:0 10px 0 10px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.Table td.tdfree {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		padding:0 0px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.Table td.freeBar {
+		border-right:1px solid #B8CFEE;
+		border-bottom:0px solid #B8CFEE;
+		padding:0 0px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.freeBar table{
+		border-left:0px solid #B8CFEE;
+		border-top:0px solid #B8CFEE;
+		width:auto;
+		margin-top:0px;
+	}
+	.freeBar td{
+		border-right:0px solid #B8CFEE;
+		border-bottom:0px solid #B8CFEE;
+		height:auto;
+		padding:0;	
+		font-size:12px;	/*字体大小*/
+	}
+	/*每个单元格*/
+	.Table td.changecol {
+		line-height:22px;
+		word-break:break-all;
+	}
+	.Table td.head {
+		height:25px;line-height:25px;	/*高度*/
+		background: url(vcomframe/images/grid3-hrow.gif); /*背景样式*/
+	}
+	.Table .custom{
+		background-color:#FAFAFA;
+	}
+	/*输入标签单元格*/
+	.labelTd {
+		text-align: right; /*右对齐*/
+		word-break: keep-all;/*必须*/
+	}
+
+	/*定义单选框按钮样式*/
+	.Table input.radio{
+		width: 18px; /*表单域宽度*/
+		cursor: hand;
+	}
+	/*定义单选框按钮样式*/
+	.Table input.checkbox{
+		width: 18px; /*表单域宽度*/
+		border-left:1px solid #8E8F8F;
+		border-top:1px solid #8E8F8F;
+		border-right:1px solid #8E8F8F;
+		border-bottom:1px solid #8E8F8F;
+	}
+	/*按钮(两个字)*/
+	.Table .custombutton{
+		width:auto;border:0px outset #B8CFEE;
+		height:22px;width: 80px;
+		background: url(vcomframe/images/button.gif) no-repeat 0 0; /*背景样式*/
+		cursor: pointer;
+	}
+	/* 分页用 的样式表*/
+	.grid-sp-c {
+	    font-size: 14px;
+	    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	    cursor:hand;
+	}
+	.x-btn{font:normal 11px tahoma,verdana,helvetica;cursor:pointer;white-space:nowrap;}
+.x-btn button{border:0 none;background:transparent;font:normal 11px tahoma,verdana,helvetica;padding-left:3px;padding-right:3px;cursor:pointer;margin:0;overflow:visible;width:auto;-moz-outline:0 none;outline:0 none;}
+* html .ext-ie .x-btn button{width:1px;}
+.ext-gecko .x-btn button{padding-left:0;padding-right:0;}
+.ext-ie .x-btn button{padding-top:2px;}
+.x-btn-icon .x-btn-center .x-btn-text{background-position:center;background-repeat:no-repeat;height:16px;width:16px;cursor:pointer;white-space:nowrap;padding:0;}
+.x-btn-icon .x-btn-center{padding:1px;}
+.x-btn em{font-style:normal;font-weight:normal;}
+.x-btn-text-icon .x-btn-center .x-btn-text{background-position:0 2px;background-repeat:no-repeat;padding-left:18px;padding-top:3px;padding-bottom:2px;padding-right:0;}
+.x-btn-left,.x-btn-right{font-size:1px;line-height:1px;}
+.x-btn-left{width:3px;height:21px;background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) no-repeat 0 0;}
+.x-btn-right{width:3px;height:21px;background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) no-repeat 0 -21px;}
+.x-btn-left i,.x-btn-right i{display:block;width:3px;overflow:hidden;font-size:1px;line-height:1px;}
+.x-btn-center{background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) repeat-x 0 -42px;vertical-align:middle;text-align:center;padding:0 5px;cursor:pointer;white-space:nowrap;}
+.x-btn-over .x-btn-left{background-position:0 -63px;}
+.x-btn-over .x-btn-right{background-position:0 -84px;}
+.x-btn-over .x-btn-center{background-position:0 -105px;}
+.x-btn-click .x-btn-center,.x-btn-menu-active .x-btn-center{background-position:0 -126px;}
+.x-btn-disabled *{color:gray!important;cursor:default!important;}
+.x-btn-menu-text-wrap .x-btn-center{padding:0 3px;}
+.ext-gecko .x-btn-menu-text-wrap .x-btn-center{padding:0 1px;}
+.x-btn-menu-arrow-wrap .x-btn-center{padding:0;}
+.x-btn-menu-arrow-wrap .x-btn-center button{width:12px!important;height:21px;padding:0!important;display:block;background:transparent url(vcomframe/ext/resources/images/default/button/btn-arrow.gif) no-repeat left 3px;}
+.x-btn-with-menu .x-btn-center{padding-right:2px!important;}
+.x-btn-with-menu .x-btn-center em{display:block;background:transparent url(vcomframe/ext/resources/images/default/toolbar/btn-arrow.gif) no-repeat right 0;padding-right:10px;}
+.x-btn-text-icon .x-btn-with-menu .x-btn-center em{display:block;background:transparent url(vcomframe/ext/resources/images/default/toolbar/btn-arrow.gif) no-repeat right 3px;padding-right:10px;}
+.x-btn-pressed .x-btn-left{background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) no-repeat 0 -63px;}
+.x-btn-pressed .x-btn-right{background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) no-repeat 0 -84px;}
+.x-btn-pressed .x-btn-center{background:url(vcomframe/ext/resources/images/default/button/btn-sprite.gif) repeat-x 0 -126px;}
+
+
+.x-toolbar{border-color:#a9bfd3;border-style:solid;border-width:0 0 1px 0;display:block;padding:2px;background:#d0def0 url(vcomframe/ext/resources/images/default/toolbar/bg.gif) repeat-x top left;position:relative;zoom:1;}
+.x-toolbar .x-item-disabled .x-btn-icon{opacity:.35;-moz-opacity:.35;filter:alpha(opacity=35);}
+.x-toolbar td{vertical-align:middle;}
+.mso .x-toolbar,.x-grid-mso .x-toolbar{border:0 none;background:url(vcomframe/ext/resources/images/default/grid/mso-hd.gif);}
+.x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label{white-space:nowrap;font:normal 11px tahoma,arial,helvetica,sans-serif;}
+.x-toolbar .x-item-disabled{color:gray;cursor:default;opacity:.6;-moz-opacity:.6;filter:alpha(opacity=60);}
+.x-toolbar .x-item-disabled *{color:gray;cursor:default;}
+.x-toolbar .x-btn-left{background:none;}
+.x-toolbar .x-btn-right{background:none;}
+.x-toolbar .x-btn-center{background:none;padding:0;}
+.x-toolbar .x-btn-menu-text-wrap .x-btn-center button{padding-right:2px;}
+.ext-gecko .x-toolbar .x-btn-menu-text-wrap .x-btn-center button{padding-right:0;}
+.x-toolbar .x-btn-menu-arrow-wrap .x-btn-center button{padding:0 2px;}
+.x-toolbar .x-btn-menu-arrow-wrap .x-btn-center button{width:12px;background:transparent url(vcomframe/ext/resources/images/default/toolbar/btn-arrow.gif) no-repeat 0 3px;}
+.x-toolbar .x-btn-text-icon .x-btn-menu-arrow-wrap .x-btn-center button{width:12px;background:transparent url(vcomframe/ext/resources/images/default/toolbar/btn-arrow.gif) no-repeat 0 3px;}
+.x-toolbar .x-btn-over .x-btn-menu-arrow-wrap .x-btn-center button{background-position:0 -47px;}
+.x-toolbar .x-btn-over .x-btn-left{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) no-repeat 0 0;}
+.x-toolbar .x-btn-over .x-btn-right{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) no-repeat 0 -21px;}
+.x-toolbar .x-btn-over .x-btn-center{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) repeat-x 0 -42px;}
+.x-toolbar .x-btn-click .x-btn-left,.x-toolbar .x-btn-pressed .x-btn-left,.x-toolbar .x-btn-menu-active .x-btn-left{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) no-repeat 0 -63px;}
+.x-toolbar .x-btn-click .x-btn-right,.x-toolbar .x-btn-pressed .x-btn-right,.x-toolbar .x-btn-menu-active .x-btn-right{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) no-repeat 0 -84px;}
+.x-toolbar .x-btn-click .x-btn-center,.x-toolbar .x-btn-pressed .x-btn-center,.x-toolbar .x-btn-menu-active .x-btn-center{background:url(vcomframe/ext/resources/images/default/toolbar/tb-btn-sprite.gif) repeat-x 0 -105px;}
+.x-toolbar .x-btn-with-menu .x-btn-center em{padding-right:8px;}
+.x-toolbar .ytb-text{padding:2px;}
+.x-toolbar .ytb-sep{background-image:url(vcomframe/ext/resources/images/default/grid/grid-blue-split.gif);background-position:center;background-repeat:no-repeat;display:block;font-size:1px;height:16px;width:4px;overflow:hidden;cursor:default;margin:0 2px 0;border:0;}
+.x-toolbar .ytb-spacer{width:2px;}
+.x-tbar-page-number{width:24px;height:14px;}
+.x-tbar-page-first{background-image:url(vcomframe/ext/resources/images/default/grid/page-first.gif)!important;}
+.x-tbar-loading{background-image:url(vcomframe/ext/resources/images/default/grid/done.gif)!important;}
+.x-tbar-page-last{background-image:url(vcomframe/ext/resources/images/default/grid/page-last.gif)!important;}
+.x-tbar-page-next{background-image:url(vcomframe/ext/resources/images/default/grid/page-next.gif)!important;}
+.x-tbar-page-prev{background-image:url(vcomframe/ext/resources/images/default/grid/page-prev.gif)!important;}
+.x-item-disabled .x-tbar-loading{background-image:url(vcomframe/ext/resources/images/default/grid/loading.gif)!important;}
+.x-item-disabled .x-tbar-page-first{background-image:url(vcomframe/ext/resources/images/default/grid/page-first-disabled.gif)!important;}
+.x-item-disabled .x-tbar-page-last{background-image:url(vcomframe/ext/resources/images/default/grid/page-last-disabled.gif)!important;}
+.x-item-disabled .x-tbar-page-next{background-image:url(vcomframe/ext/resources/images/default/grid/page-next-disabled.gif)!important;}
+.x-item-disabled .x-tbar-page-prev{background-image:url(vcomframe/ext/resources/images/default/grid/page-prev-disabled.gif)!important;}
+.x-paging-info{position:absolute;top:5px;right:8px;color:#444;}
+.x-statusbar .x-status-text{height:21px;line-height:21px;padding:0 4px;cursor:default;}
+.x-statusbar .x-status-busy{padding-left:25px;background:transparent url(vcomframe/ext/resources/images/default/grid/loading.gif) no-repeat 3px 3px;}
+.x-statusbar .x-status-text-panel{border-top:1px solid #99BBE8;border-right:1px solid #fff;border-bottom:1px solid #fff;border-left:1px solid #99BBE8;padding:2px 8px 2px 5px;}
+	

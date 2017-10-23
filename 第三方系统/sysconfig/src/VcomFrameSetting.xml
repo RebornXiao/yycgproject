@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--公共变量定义-->
+    <indexpage>
+        <!--项目名称-->
+        <project-name>药品采购系统后台管理</project-name>
+        <!--框架使用的风格-->
+        <project-tyle>default</project-tyle>
+         <!--设定打开权限菜单的风格*值为1表明按照延迟加载的方式显示树结构（第一级为qq面板）、*值为3表明按照延迟加载方式显示树结构(没有qq面板)-->
+		<menu-type>3</menu-type>
+		<!-- 设定打开页面的个数 -->
+		<tab-count>10</tab-count>
+		<!--自定义配置欢迎页面，如果不配置默认的不需要修改-->
+		<welcome-page>vcomframe/common/today.htm</welcome-page>
+        <!--头部定义-->
+        <head>
+        	<!--配置head页面，或者配置html代码（两者选一）-->
+        	<url></url>
+        	<!--项目LOGO-->
+        	<project-icon>../admin/images/name.gif</project-icon>
+        	<html>
+        	<![CDATA[
+            <table width="200" height="42" border="0" cellpadding="0" cellspacing="0" align="right">
+				<tr>
+					<td>
+						<form id="form1" action="http://vcom-sso:8080/login" method="post" target="_parent">
+							<input type="hidden" name="sysstr" value="http://192.168.14.116:8088/index.action,;cms" id="sysstr" />
+						</form>
+						<img src="vcomframe/images/zx.gif" width="16" height="16" />
+						<a href="javascript:quit();">注销</a>&nbsp;
+						<img src="vcomframe/images/zx.gif" width="16" height="16" />
+						<a href="javascript:update();">修改密码</a>&nbsp;
+						<!-- <img src="vcomframe/images/icon_help.gif" width="14" height="14" />
+						<a href="#" target="_black">帮助</a>&nbsp;&nbsp; -->
+					</td>
+				</tr>
+			</table>
+			<script type="text/javascript">
+			   function quit(){
+			   	  if(window.confirm("确定要退出吗?")){
+			   	  	 form1.action = "../admin/quit.action";
+				  		form1.submit();	
+			   	  }		    
+               }
+               function update(){
+                  actionname="../admin/toEditPwd.action";			    
+				  var handle = showModalDialog(actionname,window,"dialogWidth:500px;dialogHeight:250px;help:no;scroll:auto;status:no");
+               }
+            </script>
+            ]]>
+        	</html>
+        </head>
+        <index>
+        	<index-icon>../admin/images/login_bg.jpg</index-icon>
+        </index>
+        <!--配置功能菜单项(默认从session获取，获取不到，启用默认配置)-->
+        <menuTree><![CDATA[
+          	[{text:"系统管理",icon:"vcomframe/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:3,
+					children:[
+						{text:"系统管理",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:31,
+							children:[
+								{text:"模块管理",href:"../admin/toModuleManagePage.action?menutype=1",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:301},
+								{text:"操作管理",href:"../admin/toModuleManagePage.action?menutype=2",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:302},
+								{text:"用户管理",href:"../admin/getAllUserList.action?menutype=3",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:311},
+								{text:"角色管理",href:"../admin/role/getRoleUI.action",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:312},
+								{text:"角色权限分配",href:"../admin/role/getRollPermissionUI.action",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:313},
+								{text:"用户权限分配",href:"../admin/user/getUserPermissionUI.action",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:314}
+						]},
+						{text:"日志管理",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:32,
+							children:[
+								{text:"日志管理",href:"../log/getLogList.action",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:321}
+						]}
+					]},
+					{text:"EXT样例",icon:"vcomframe/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:1,
+					children:[
+					{text:"表格样例(grid)",href:"vcomframe/example/testExtTable.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2322222},
+					{text:"可拖动表格(grid)",href:"vcomframe/example/DragExtTable.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2322223},
+					{text:"组件",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:23,
+						children:[
+									{text:"可输入下拉框",href:"vcomframe/example/ComboBox.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:232},
+									{text:"ext树",href:"",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:233,
+									children:[
+										{text:"带checkbox的树",href:"vcomframe/example/tree/checkboxtree.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2331},
+										{text:"普通树",href:"vcomframe/example/tree/customtree.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2332},
+										{text:"右键菜单树",href:"vcomframe/example/tree/rightmenutree.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2333}
+									]}
+								]	
+					}
+					]},
+					{text:"普通样例",icon:"vcomframe/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:2,
+				children:[{text:"样式",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:21,
+					children:[{text:"表格样式",href:"vcomframe/example/table.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:211},
+						{text:"表单样式",href:"vcomframe/example/input.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:212}
+					]
+					},	
+					{text:"组件",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:22,
+						children:[
+									{text:"日期控件",href:"vcomframe/list/DatePicker/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:222},
+									{text:"分页面板",href:"vcomframe/list/TabPanel/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:223},
+									{text:"可输入选择框",href:"vcomframe/list/select/demo.htm",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:224},
+									{text:"ip输入框",href:"vcomframe/list/ipinput/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:225},
+									{text:"简单报表",href:"vcomframe/list/report/demo.htm",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:226},
+									{text:"消息提示",href:"vcomframe/list/message/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:227},
+									{text:"js树",href:"vcomframe/list/tree/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:228},
+									{text:"web编辑器",href:"vcomframe/list/ewebeditor/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:229},
+									{text:"滑动条",href:"vcomframe/list/slider/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2210},
+									{text:"jquery",href:"vcomframe/list/ajax/demo.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2211}
+								]	
+					}
+					]
+					}
+				]
+          			]]>
+        </menuTree>
+    </indexpage>
+    <!--公共部分配置-->
+    <common>
+    	<!--值为2启用右键菜单，1为关闭右键菜单-->
+    	<oncontext-menu>2</oncontext-menu>
+    </common>
+</root>

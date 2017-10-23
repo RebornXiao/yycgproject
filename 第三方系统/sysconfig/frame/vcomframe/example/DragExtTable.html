@@ -1,0 +1,237 @@
+<!--
+   author:liuzhiqiang
+   date: 2008-6-23
+-->
+<html>
+	<head>
+		<title>信息管理</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="vcomframe/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="vcomframe/css/common.css" />
+		<link rel="stylesheet" id="ext-all-css" type="text/css" href="vcomframe/ext/resources/css/ext-all.css" />
+		<style>
+			.add {
+			    background-image:url(vcomframe/images/add.gif) !important;
+			}
+			.option {
+			    background-image:url(vcomframe/images/plugin.gif) !important;
+			}
+			.remove {
+			    background-image:url(vcomframe/images/delete.gif) !important;
+			}
+			.ext-ie .x-form-text{margin:0px 0;height:22px;line-height:18px;}
+			.grid-row-insert-below {    border-bottom:1px solid #3366cc;}
+			.grid-row-insert-above {    border-top:1px solid #3366cc;} 
+		</style>
+	<!--如果需要启用滚动条，则在boay标签中加入scroll=yes即可-->	
+	<body>
+		
+		<div id="loading-mask"></div>
+		<div id="loading">
+			<div class="loading-indicator">
+				<img src="vcomframe/images/extanim32.gif" width="32" height="32"
+					style="margin-right:8px;" align="absmiddle" />
+				页面加载中，请稍后...
+			</div>
+		</div>
+		<script type="text/javascript" src="vcomframe/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="vcomframe/ext/ext-all.js"></script>
+	    <script type="text/javascript" src="vcomframe/ext/windows.js"></script>
+		<SCRIPT type="text/javascript" src="vcomframe/ext/openwindow.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="vcomframe/ext/drag.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="vcomframe/ext/drag-grid.js"></SCRIPT>
+		<script type="text/javascript" src="vcomframe/list/DatePicker/WdatePicker.js"></script>
+		<!--页面框架begin-->
+		<table width="100%">
+			<tr>
+				<TD>
+					<!--检索部分begin-->
+					<table align="center" class="TableForm" cellpadding="3" cellspacing="0">
+						<form name="search" action="">
+						<caption>文章检索</caption>
+						<colgroup>
+							<col width="15%"></col>
+							<col width="35%"></col>
+							<col width="15%"></col>
+							<col width="35%"></col>
+						</colgroup>
+						<tr>
+							<td class="labelTd">文章名称</td>
+							<td colspan="3"><input type="text" value="" name="title"></td>
+						</tr>
+						<tr>
+							<td class="labelTd">文章来源</td>
+							<td><input type="text" value=""></td>
+							<td class="labelTd">添加时间</td>
+							<td>
+								<input class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center">
+							<input type="button" class="button" value="检 索" onclick="searchs();">
+							<input class="button" id="resetNote" type="reset" value="重 置">
+							<input class="longbutton" id="resetNote" type="reset" value="样式测试">
+							</td>
+						</tr>
+						</form>
+					</table>
+				</TD>
+			</tr>
+			<tr>
+				<TD>
+					<!--列表部分begin-->
+						<div id="grid-example"></div>
+				</TD>
+			</tr>
+		</table>
+		<!-- 添加按钮层-->
+		<div id="hello-win" class="opendisplay">
+			<div id="content" class="opencol">
+				<iframe topmargin="0" leftmargin="0" id="frameadd1" scrolling="yes" marginheight="0" marginwidth="0"
+					style="width: 100%; height: 100%" src="" frameborder="0">
+				</iframe>	
+		</div>
+		</div>
+		
+		
+		
+		<div id="hello-winedit" class="opendisplay">
+			<div id="contentedit" class="opencol">
+				<iframe topmargin="0" leftmargin="0" id="frameadd2" scrolling="yes" marginheight="0" marginwidth="0"
+					style="width: 100%; height: 100%" src="" frameborder="0">
+				</iframe>
+		</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+    /************************ js 的绑定代码 ***************************/
+    var myData = [{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务1',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'},
+    				{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务2',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'},
+    				{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务3',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'},
+    				{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务4',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'},
+    				{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务5',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'},
+    				{id:1,title:'徐才厚在美演讲我国国防政策和军队多样化任务6',comfrom:'新华网',person:'admin',persionorg:'',time:'2009-02-02'}
+    				];
+	var sps={currentPage:0,pageSize : 15,pageCount : 0,recordCount : 6,nextPage : 1,previewPage : 1,startRecord : 0};
+	/*设置从json中所取的列*/
+	var readerline=[
+				  {name:'id'},
+				  {name:'title'},
+			      {name:'comfrom'},
+			      {name:'person'},
+			      {name:'persionorg'},
+			      {name:'time'}
+			];
+	/*设置从grid表头*/		
+	var column=[new Ext.grid.RowNumberer(),
+        		new Ext.grid.CheckboxSelectionModel(),
+	            {header: "标题", width: 360, sortable: true, dataIndex: 'title'},
+	            {header: "来源", width: 75, sortable: true, renderer: null, dataIndex: 'comfrom'},
+	            {header: "添加人", width: 75, sortable: true, renderer: null, dataIndex: 'person'},
+	            {header: "所在机构", width: 75, sortable: true, renderer: null, dataIndex: 'persionorg'},
+	            {header: "添加时间", width: 85, sortable: true, renderer: null, dataIndex: 'time'}
+	        ];
+	        
+	
+	/*功能按钮区域*/
+	var splitbar=new Ext.Toolbar({items: [
+		    		 	{text: '添加',iconCls:'add', handler: toadd},'-',
+		    		 	{text: '修改',iconCls:'option', handler: toedit},'-',
+		    		 	{text: '删除',iconCls:'remove',handler: todel}]});
+	/*定义grid*/
+	var table=new grid('grid-example',"文章列表","table",readerline,column,myData,sps,true,splitbar);
+	/*分页回调*/
+	var _page=1;
+	table.turnPage(function(iPage){
+		_page=iPage;
+	    searchs();
+		});
+	/*选中某行的时间进行回调*/
+	var selectid="";
+	table.selectRow(function(select){
+		selectid="";
+		for(var i=0;i<select.length;i++){
+			selectid=selectid+select[i].get("id");
+		}
+	});
+
+    /*实现检索功能*/
+    function searchs(){
+    	ajax({
+		        url : 'articlesplitpage.action',//调用的url
+		        success : function(response) {//成功返回
+		        	var responseArray = Ext.util.JSON.decode(response.responseText);
+		            table.reloadData(responseArray[0]);
+    				table.changeSplitPage(responseArray[1]);
+    				_page=1;
+		        },
+		        failure : function(response) {//失败返回
+		        	alert(response.responseText);
+		            err("执行检索出错了，请检查!");
+		        },
+		        timeout : 30000,//超时设置
+		        params : {//传递的参数
+		            "title" : document.all.title.value,
+		            "page" : _page
+		        }
+		    });
+    }
+    /*实现添加文章功能*/
+    function toSaveOrUpdateArticle(){
+		/*验证标题是否为空*/
+		if(!centerframe.CheckNnAndSlAndSc(centerframe.myform.name,"根据你的需求，模板包名称",null,30)){return false;};
+		/*验证上传文件是否为空*/
+		if(!centerframe.CheckNotNull(centerframe.myform.myfile,"根据你的需求，请选择要上传的文件!")){return false;};
+		if(!centerframe.CheckEndWith(centerframe.myform.myfile,"根据你的需求，上传文件必须是ZIP格式!",".zip")){return false;};
+		/*验证终端类型是否为空*/
+		if(!centerframe.CheckSelectNotNull(centerframe.combobox2,"根据你的需求，请选择终端类型!")){return false;};
+		/*验证类型是否为空*/
+		if(!centerframe.CheckSelectNotNull(centerframe.treecombobox,"根据你的需求，请选择模板包类型!")){return false;};
+		return
+	}
+	/*实现删除功能*/
+    function todel(){
+    	if(selectid==""){
+    		err("不选择一项怎么删除呢？朋友!");
+    		return false;
+    	}
+    	confirm("你确定要删除选择的信息吗？此操作不可恢复。",conformback);
+    	function conformback(btn){
+    		if(btn=="yes"){
+	    			ajax({
+			        url : 'toDelarticle.action',
+			        success : function(response) {
+			        	var responseArray = Ext.util.JSON.decode(response.responseText);
+			            table.reloadData(responseArray[0]);
+	    				table.changeSplitPage(responseArray[1]);
+	    				selectid="";
+			        },
+			        failure : function() {
+			            err("删除文章出错了，请检查!");
+			        },
+			        headers: {
+				       'my-header': 'foo'
+				    },
+			        method:'post',
+			        timeout : 30000,
+			        params : {	id:selectid,
+			        			title:document.all.title.value,
+			        			page : _page
+			        		}
+			    });
+    		}
+    	}
+    }
+    var openwindows=new openwindow('hello-win','content','添加文章信息',700,300,toSaveOrUpdateArticle,null,true);
+    var editwindows=new openwindow('hello-winedit','contentedit','修改文章信息',700,300,null,null,true);
+    //点击添加按钮执行的动作
+    function toadd(){
+    	openwindows.show(null,"vcomframe/example/mbbadd.html");
+    }
+   //点击修改按钮执行的动作
+   function toedit(){
+   		editwindows.show();
+    }
+</script>
+</html>

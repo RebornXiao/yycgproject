@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+	<!--========================================================================
+		定义受环境影响易变的变量
+		=========================================================================-->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 数据源配置 -->
+	
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+    <value>org.logicalcobwebs.proxool.ProxoolDriver</value>
+    </property>
+    <property name="url">
+    <value>proxool.jwxt</value>
+    </property>
+    </bean>
+	<bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>                  
+ 	<!-- spring事务管理 方法一 -->
+	<aop:config>
+	  <aop:pointcut id="serviceOperation"
+	   expression="execution(* zzvcom.*.service.*.*(..))" />
+	  <aop:advisor pointcut-ref="serviceOperation"
+	   advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" rollback-for="Exception" />
+			<tx:method name="save*" rollback-for="Exception" />
+			<tx:method name="update*" rollback-for="Exception" />
+			<tx:method name="delete*" rollback-for="Exception" />
+			<tx:method name="del*" rollback-for="Exception" />
+			<tx:method name="*" read-only="true"
+				rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	 <!--根据dataSource和configLocation创建一个SqlMapClient-->
+    <bean id="sqlMapClient" scope="prototype"
+          class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource">
+        
+            <ref local="dataSource"/>
+        </property>
+        <property name="configLocation">
+            <value>classpath:sql-map-config.xml</value>
+        </property>
+    </bean>
+     <!--根据sqlMapClien创建一个SqlMapClient模版类-->
+    <bean id="sqlMapClientTemplate" scope="prototype"
+          class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+	<import resource="springconfig/applicationContext_log.xml"/>
+	<import resource="springconfig/applicationContext_module.xml"/>
+	<import resource="springconfig/applicationContext_role.xml"/>
+	<import resource="springconfig/applicationContext_user.xml"/>
+</beans>

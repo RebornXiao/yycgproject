@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<!--载入Spring的ApplicationContext，即IoC容器-->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+   <!--系统contextPath路径-->
+	<context-param>
+		<param-name>baseurl</param-name>
+		<param-value>/sysconfig/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>fromsysurl</param-name>
+		<param-value>/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/classes/applicationContext.xml
+		</param-value>
+	</context-param>
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			zzvcom.sys.util.TaskMonitor
+		</listener-class>
+	</listener>
+	<!-- 字符编码Filter -->
+	 <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>zzvcom.sys.util.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+	<!-- 验证码 begin -->
+		 <servlet>
+    <servlet-name>proxoolServletConfigurator</servlet-name>
+    <servlet-class>org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>
+    <init-param>
+      <param-name>xmlFile</param-name>
+      <param-value>WEB-INF/proxool.xml</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+	<servlet>
+		<servlet-name>ValidateCodeServlet</servlet-name>
+		<servlet-class>
+			zzvcom.sys.util.servlet.ValidateCodeServlet
+		</servlet-class>
+		<init-param>
+			<param-name>width</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>height</param-name>
+			<param-value>20</param-value>
+		</init-param>
+		<init-param>
+			<param-name>codeCount</param-name>
+			<param-value>4</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateCodeServlet</servlet-name>
+		<url-pattern>/validateCodeServlet.frame</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 前台框架开始 -->
+	<servlet>
+		<servlet-name>ApplicationFrame</servlet-name>
+		<servlet-class>
+			zzvcom.frame.servlet.VcomFrameServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ApplicationFrame</servlet-name>
+		<url-pattern>/vcomframe.frame</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ApplicationFrame</servlet-name>
+		<url-pattern>/vcomframe/*</url-pattern>
+	</servlet-mapping>
+	<!-- 前台框架结束 -->
+	<!-- 定义session超时时间 -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- struts2 -->
+	<filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+</web-app>

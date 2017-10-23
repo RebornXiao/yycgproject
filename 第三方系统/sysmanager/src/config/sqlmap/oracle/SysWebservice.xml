@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysWebserviceCfg">
+	
+	<sql id="SELECT-SysWebserviceCfg">
+		select ss.id, s.sysid,s.sysname,ws.typeid, ws.typename, s.url, ss.port, ss.wsname servicename, ss.servicetype serviceUrn,ss.vchar1 namespace
+		  from bss_sys_syswscfg ss, bss_sys_system s, bss_sys_wservice ws
+		 where s.sysname like '%' || #sysname# || '%'
+		   and ss.sysid = s.sysid
+		   and ss.typeid = ws.typeid
+	</sql>
+	<sql id="prefixTotalCount">select count(*) total from (</sql>
+	<sql id="suffixTotalCount">)</sql>
+	<select id="getSysWebserviceCfgList_count" parameterClass="string"
+		resultClass="int">
+		<include refid="prefixTotalCount" />
+        <include refid="SELECT-SysWebserviceCfg" />
+		<include refid="suffixTotalCount" />
+	</select>
+
+	<select id="getSysWebserviceCfgList" parameterClass="string"
+		resultClass="syswebservicecfg">
+		<include refid="SELECT-SysWebserviceCfg" />
+	</select>
+	
+	<select id="isExists" resultClass="int" parameterClass="map">
+	   <include refid="prefixTotalCount"/>
+	       select 1 from bss_sys_syswscfg where sysid = #sysid# and typeid = #typeid# and port = #port#
+	   <include refid="suffixTotalCount"/>
+	</select>
+	
+	<select id="getSystemList" resultClass="system">
+	   <![CDATA[ select sysid systemId,sysname systemName from bss_sys_system where sysid <> '1' ]]>
+	</select>
+	
+	<select id="getWebserviceTypeList" resultClass="webservicetype">
+	   select w.typeid, w.typename from bss_sys_wservice w
+	</select>
+	
+	<delete id="deleteSysWebServiceCfgByID" parameterClass="string">
+	   delete from bss_sys_syswscfg where id = #id#
+	</delete>
+	
+	<insert id="insertSysWebserviceCfg" parameterClass="map">
+	   insert into bss_sys_syswscfg(id,sysid,typeid,port,wsname,servicetype,vchar1) 
+	       values(SEQUENCE_ID.NEXTVAL,#sysid#,#typeid#,#port#,#servicename#,#serviceUrn#,#namespace#)
+	</insert>
+	
+	<update id="updateSysWebserviceCfg" parameterClass="map">
+		update BSS_SYS_SYSWSCFG set sysid = #sysid#,typeid = #typeid#,port = #port#,wsname = #servicename#,servicetype = #serviceUrn#,vchar1 = #namespace# where id = #id#
+	</update>
+<select id="selectIdByName" resultClass="webservicetype" parameterClass="string">
+		SELECT t.id, t.PORT,t.SERVICETYPE,t.SYSID,t.TYPEID,t.WSNAME FROM
+		BSS_SYS_SYSWSCFG t WHERE t.WSNAME=#wsname#
+	</select>
+	<select id="selectNameById" resultClass="syswebservicecfg" parameterClass="string">
+		SELECT t.id, t.PORT,t.SERVICETYPE,t.SYSID,t.TYPEID,t.WSNAME FROM
+		BSS_SYS_SYSWSCFG t WHERE t.id=#wsId#
+	</select>
+</sqlMap>

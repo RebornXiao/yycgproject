@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="vcomrole">
+
+	<!--根据分页得到所有的角色 -->
+	<select id="getAllBySplitPage" resultClass="zzvcom.sys.pojo.VcomSysRole" parameterClass="map">
+		<isNotEmpty property="start">
+			select * from (
+			select rownum pages_rownum_t,q_t1.* from (
+		</isNotEmpty>
+		select * from vcom_sys_role where rolename like '%$rolename$%' 
+		<isNotEmpty property="owner" prepend="and">
+			owner=#owner#
+		</isNotEmpty>
+		<isNotEmpty property="extstr" prepend="and">
+			$extstr$
+		</isNotEmpty>
+		order by sort 
+<isNotEmpty property="start">
+		<![CDATA[
+				)q_t1 where rownum<=$rowend$
+				  )q_t
+		  where q_t.pages_rownum_t>$start$
+		  ]]>
+		</isNotEmpty>
+	</select>
+	<select id="getAllBySplitPageCount" resultClass="int" parameterClass="map">
+		select count(*) from vcom_sys_role where rolename like '%$rolename$%' 
+		<isNotEmpty property="owner" prepend="and">
+			owner=#owner#
+		</isNotEmpty>
+		<isNotEmpty property="extstr" prepend="and">
+			$extstr$
+		</isNotEmpty>
+	</select>
+
+	<select id="getRoleByIds" resultClass="zzvcom.sys.pojo.VcomSysRole" parameterClass="String">
+		select * from vcom_sys_role m where ','||#ids#||','  like  '%,'||id||',%'  order by m.sort asc
+	</select>
+	<select id="getAllRole" resultClass="zzvcom.sys.pojo.VcomSysRole">
+		select * from vcom_sys_role m order by m.sort asc
+	</select>
+
+	<select id="isContainRolename" resultClass="zzvcom.sys.pojo.VcomSysRole" parameterClass="map">
+		select * from vcom_sys_role 
+		<dynamic prepend="where">
+			<isNotEmpty property="rolename" prepend="and">
+				rolename=#rolename#
+			</isNotEmpty>
+			<isNotEmpty property="id" prepend="and">
+				id not in($id$)
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="findroleuserCount" resultClass="int" parameterClass="String">
+		select count(1) from vcom_sys_user where role = $roleid$
+	</select>
+	
+	<!--保存role信息 -->
+	<insert id="create" parameterClass="zzvcom.sys.pojo.VcomSysRole">
+		insert into vcom_sys_role ( rolename,permissions,sort,createtime,updatetime,remark,type,owner) 
+		values ( #rolename#,#permissions#,#sort#,sysdate, sysdate, #remark#,#type#,#owner#)
+		<selectKey resultClass="java.lang.String" keyProperty="id">
+			SELECT id FROM vcom_sys_role where  rolename = #rolename#
+		</selectKey>
+	</insert>
+	<!--删除role信息 -->
+	<delete id="delete" parameterClass="zzvcom.sys.pojo.VcomSysRole">
+		delete from vcom_sys_role where id =#id# 
+	</delete>
+	<!--修改role信息 -->
+	<update id="update" parameterClass="zzvcom.sys.pojo.VcomSysRole">
+		update vcom_sys_role set 
+			rolename = #rolename#, 
+			sort = #sort#,
+			permissions=#permissions#,
+			updatetime = sysdate, 
+			remark = #remark#
+			where id = #id# 
+	</update>
+	<!--根据id查询role信息 -->
+	<select id="query" resultClass="zzvcom.sys.pojo.VcomSysRole" parameterClass="java.lang.String">
+		select * from vcom_sys_role where id=#id#
+	</select>
+</sqlMap>

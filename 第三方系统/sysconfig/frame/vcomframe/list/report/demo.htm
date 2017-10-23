@@ -1,0 +1,87 @@
+<html xmlns:vcomUI xmlns:v>
+<head>
+    <style type="text/css">
+        v\:* {
+            behavior: url( #default#VML )
+        }
+
+        o\:* {
+            behavior: url( #default#VML )
+        }
+
+        .shape {
+            behavior: url( #default#VML )
+        }
+
+        TD {
+            FONT-SIZE: 12px
+        }
+    </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="vcomframe/list/report/report.js"></script>
+    <script type="text/javascript" src="vcomframe/js/common.js"></script>
+</head>
+
+<body scroll="auto">
+<div id="test1"></div>
+<div id="test2"></div>
+<div id="test3"></div>
+<div id="test4"></div>
+<div id="test5"></div>
+
+<script type="text/javascript">
+	var data=[{n:'中国经营报',v:200},{n:'招聘网',v:800}
+              ,{n:'51job',v:1000},{n:'新民晚报',v:600},
+              {n:'南方周末',v:1222},{n:'羊城晚报',v:900},
+              {n:'新闻晚报',v:3213}];
+	var test=new doPaint("test1","水平","柱图",data,10,20,400,200,"vcomUI 柱图测试");
+	var data2=[{n:'中国经营报',v:200},{n:'招聘网',v:800}
+              ,{n:'51job',v:1000},{n:'新民晚报',v:600},
+              {n:'南方周末',v:1222},{n:'羊城晚报',v:900},
+              {n:'新闻晚报',v:3213}];
+	var test2=new doPaint("test2","垂直","柱图",data2,10,250,400,200,"vcomUI 柱图测试");
+	var data3=[{n:'中国经营报',v:200},{n:'招聘网',v:800}
+              ,{n:'51job',v:1000},{n:'新民晚报',v:600},
+              {n:'南方周末',v:1222},{n:'羊城晚报',v:900},
+              {n:'新闻晚报',v:3213}];
+	var test3=new doPaint("test3","图例","饼图",data3,10,500,400,200,"vcomUI 饼图测试");
+	var data4=[{n:'中国经营报',v:200},{n:'招聘网',v:800}
+              ,{n:'51job',v:1000},{n:'新民晚报',v:600},
+              {n:'南方周末',v:1222},{n:'羊城晚报',v:900},
+              {n:'新闻晚报',v:3213}];
+	var test4=new doPaint("test4","百分比","饼图",data3,10,800,400,200,"vcomUI 饼图测试");
+	var data5=[{fields:['一月','二月','三月','四月','五月','六月','七月'],
+              data:[{c:'#ff0000',w:1,t:1,_t:2,n:'公司1',v:[200,1200,900,600,1222,413,800]},
+              {c:'#0000ff',w:1,t:1,_t:3,n:'公司2',v:[400,500,1040,1600,522,813,980]},
+              {c:'#004d00',w:1,t:1,_t:3,n:'公司3',v:[900,890,1240,1300,722,833,1280]}]}];
+	var test5=new doPaint("test5","","折线图",data5,10,1050,600,250,"vcomUI 折线图测试");
+</script>
+
+
+<br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<div style="top:700px;margin-left:100px;font-family: verdana;font-size: 9pt;border-width:1px;border-color: #caa700;border-style: solid;background-color: #ffffa2;padding: 4;margin: 0;">
+    <pre>
+    <b>一、功能简介</b><br>
+     图例分析组件可以清楚地看出所表示的信息。
+     此组件支持水平柱状图，垂直柱状图，以图例显示的饼图，以百分比显示的饼图，还可支持折线图。
+
+    <b>二、使用说明</b>  <br>
+     1、在页面中引入report.htc文件
+    例如：< ?IMPORT namespace="vcomUI" implementation="vcomframe/list/report/report.js">
+      2.  使用并设置属性
+        < vcomUI:report id="zt" showdir="水平" type="柱图"
+         //显示类型为水平柱图，当type为柱图时，showdir可为“水平”或“垂直”，
+        当type为饼图时，showdir可为“图例”或“百分比”，当type为折线图时，showdir可省略不写
+          var data=[{n:'中国经营报',v:200},{n:'招聘网',v:800}
+              ,{n:'51job',v:1000},{n:'新民晚报',v:600},
+              {n:'南方周末',v:1222},{n:'羊城晚报',v:900},
+              {n:'新闻晚报',v:3213}];
+		  var test=new doPaint("test1","水平","柱图",data,10,20,400,200,"vcomUI 柱图测试");
+  </div>
+</body>
+</html>

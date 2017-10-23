@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Module">
+	<sql id="select-all-module">
+		select
+		  t.moduleid  as moduleId,
+		  t.sysid     as systemId,
+		  t.name      as moduleName,
+		  t.parentid  as upperModuleId,
+		  s.sysname   as systemName,
+		  t1.name     as upperModuleName,
+		  t.url       as url,
+		  t.icon      as icon,
+		  t.showorder as showOrder,
+		  t.isused    as isUsed
+		from BSS_SYS_MODULE t
+		  left join BSS_SYS_MODULE t1
+		    on t.parentid = t1.moduleid
+		  inner join BSS_SYS_SYSTEM s
+		    on t.sysid = s.sysid
+		where 1=1    
+	</sql>
+    <sql id="order-by-showorder">order by t.showorder</sql>
+    
+    <select id="getModuleById" parameterClass="string" resultClass="module">
+        <include refid="select-all-module"/>
+        and t.moduleid = #moduleId#
+    </select>
+    <select id="getModuleByName" parameterClass="string" resultClass="module">
+        <include refid="select-all-module"/>
+        and t.name = #moduleName#
+    </select>
+    
+    <select id="getModuleListForAdmin" parameterClass="map" resultClass="module">
+        <include refid="select-all-module"/>
+        and t.sysid = #systemId#
+        <dynamic>
+            <isNotNull property="upperModuleId">
+                and t.parentid = #upperModuleId#
+            </isNotNull>
+        </dynamic>
+        <include refid="order-by-showorder"/>
+    </select>
+    
+    <select id="getModuleListForCommon" parameterClass="map" resultClass="module">
+        <include refid="select-all-module"/>
+        and t.sysid = #systemId#
+        and t.parentid = #upperModuleId#
+        and t.moduleid in(
+        	select distinct au.moduleid
+          	from ROLE_AUTH au
+         	where au.roleid = #roleId#
+           	and au.sysid = #systemId#
+          	and au.nodeid = #deployNodeId#  
+        )
+        <include refid="order-by-showorder"/>
+    </select>
+    
+    <select id="getUsedModuleList" parameterClass="string" resultClass="module">
+		select t.moduleid as moduleId
+		  from BSS_SYS_ROLEMODULE t
+		 where t.moduleid = #moduleId#       
+    </select>
+    
+    <insert id="insertModule" parameterClass="module">
+		insert into BSS_SYS_MODULE
+		  (moduleid, sysid, name, parentid, url, icon, showorder, isused)
+		values
+		  (#moduleId#, #systemId#, #moduleName#, #upperModuleId#, #url#, #icon#, #showOrder#, #isUsed#)
+    </insert>
+    <update id="updateModule" parameterClass="module">
+		update BSS_SYS_MODULE
+		   set sysid     = #systemId#,
+		       name      = #moduleName#,
+		       parentid  = #upperModuleId#,
+		       url       = #url#,
+		       icon      = #icon#,
+		       showorder = #showOrder#,
+		       isused    = #isUsed#
+		 where moduleid = #moduleId#
+    </update>
+    <delete id="deleteModule" parameterClass="string">
+        delete from BSS_SYS_MODULE where moduleid = #moduleId#
+    </delete>
+    
+    <update id="saveOrder" parameterClass="module">
+        update BSS_SYS_MODULE set showOrder = #showOrder# where moduleid = #moduleId#
+    </update> 
+    
+</sqlMap>
+

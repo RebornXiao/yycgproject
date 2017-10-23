@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<project name="NMS" default="compile" basedir=".">
+    
+    <!--使用说明：首先在下边配置jboss根路径，编译成功后的war目录自动到jboss下，即可运行jboss-->
+
+    <!-- 配置jboss根路径 -->
+    <property name="jbosspath" location="D:/jboss-4.2.3" />
+    <property name="warname" value="jsoujwcommon1.0.war" />
+
+    <!-- 配置路径变量 -->
+	<property name="lib.dir" value="./WebRoot/WEB-INF/lib" />
+	<property name="src" location="src" />
+	<property name="WebRoot" location="WebRoot" />
+	<property name="class.dir" location="./WebRoot/WEB-INF/classes" />
+	<property name="jboss.lib" value="${jbosspath}/server/default/lib" />
+    <property name="war.dir" value="${jbosspath}/server/default/deploy/${warname}" />
+	<property name="war.class.dir" value="${jbosspath}/server/default/deploy/${warname}/WEB-INF/classes" />
+    <!-- 配置环境变量 -->
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+		<fileset dir="${jboss.lib}" includes="*.jar" />
+	</path>
+     <!-- 目标任务 -->
+	<target name="compile" description="compile the source ">
+		<!-- 创建类文件夹 -->
+		<delete dir="${war.dir}" />
+        <mkdir dir="${war.class.dir}" />
+		<!-- 编译类文件 -->
+		<javac target="1.5" encoding="utf-8" srcdir="${src}"
+			destdir="${war.class.dir}" source="1.5" fork="true" memorymaximumsize="500M" includeantruntime="on">
+			<compilerarg value="-Xlint:unchecked"/>
+			<classpath refid="classpath" />
+		</javac>
+		<!-- 复制配置文件 -->
+		<copy todir="${war.class.dir}">
+			<fileset dir="${src}">
+				<include name ="**/*" />
+				<include name ="**/*.*" />
+				<exclude name ="**/*.java" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${war.dir}">
+			<fileset dir="${WebRoot}">
+				<exclude name = ".svn/*"/>
+				<exclude name ="**/classes/**"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+</project>

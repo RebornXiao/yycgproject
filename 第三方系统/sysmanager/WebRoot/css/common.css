@@ -1,0 +1,155 @@
+	/*
+		form区样式表
+		AUTHOR:刘志强
+		DATE:2008-7-18
+		email：liuzhiqiang@zzvcom.com
+	*/
+	*{margin:0px;padding:0px;font-size:12px}
+	/*公共样式*/
+	body {margin:0px;padding:2px}
+	/*外层容器,页面所有内容都应该放置在此容器中，内部所有元素宽度设为100%*/
+	#container{width:950px;margin:0 auto;text-align:left}	
+	.alignLeft{text-align:left;}	/*左对齐，combo组件使用*/
+	
+	/*星号*/
+	.star {color:#f00}
+	/*外层表格，定义上下间距及宽度*/
+	.outerTable{width:100%;margin-top:5px}
+	/*表格外边框*/
+	.TableForm {
+		border-left:1px solid #B8CFEE;
+		border-top:1px solid #B8CFEE;
+		width:100%;
+		margin-top:2px;
+	 }
+	 /*表格标题*/
+	.TableForm caption {
+		height: 25px; line-height: 25px;	/*高度25px*/
+		text-align: left; /*对齐方式:居中对齐*/
+		font-size: 12px; font-weight: bold;	color:#15428B;/*字体样式:14像素 粗体*/
+		padding-left: 5px; /*左边距10px*/
+
+		border-left:1px solid #B8CFEE;	/*边框*/
+		border-right:1px solid #B8CFEE;	/*边框*/
+		background: url(../images/top-bottom.gif);/*背景*/
+	}
+	 /*每个单元格*/
+	.TableForm td {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		height:30px;line-height:30px;	/*高度*/
+		padding:0 20px 0 10px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.div{
+		border-left:0px solid #ffffff;
+		border-top:0px solid #ffffff;
+		width: 100%
+	}
+	.div table{
+		border-left:0px solid #B8CFEE;
+		border-top:0px solid #B8CFEE;
+		width:auto;
+		margin-top:0px;
+	}
+	.div td{
+		border-right:0px solid #B8CFEE;
+		border-bottom:0px solid #B8CFEE;
+		height:auto;
+		padding:0;	
+		font-size:12px;	/*字体大小*/
+	}
+	.div input{
+	
+	}
+	.tdpic{
+		position:absolute;
+		margin-top: 4px;
+		margin-left: 2px;
+	}
+	.tdpicselect{
+		position:absolute;
+		margin-top: 4px;
+		margin-left: 20px;
+	}
+	/*每个单元格*/
+	.TableForm td.tdcustom {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		padding:0 10px 0 10px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	.TableForm td.tdfree {
+		border-right:1px solid #B8CFEE;
+		border-bottom:1px solid #B8CFEE;
+		height:30px;line-height:30px;	/*高度*/
+		padding:0 1px;	/*左右内边距10px*/
+		font-size:12px;	/*字体大小*/
+	}
+	/*输入标签单元格*/
+	.labelTd {
+		text-align: right; /*右对齐*/
+		word-break: keep-all;/*必须*/
+	}
+	/*所有输入框样式,通过js将radio和checkbox的边框去掉*/
+	.TableForm input, .TableForm textarea, .TableForm .textFieldStyle {
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background: url(../images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 100%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+	}
+	.TableForm input.custom90{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background: url(../images/inputBg.jpg) no-repeat 0 0; /*背景样式*/
+		width: 90%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+	}
+	/*出错样式定义*/
+	.TableForm input.form-invalid,textarea.form-invalid{background:#fff url(../../ext/resources/images/default/grid/invalid_line.gif) repeat-x bottom;border:1px solid #dd7870;}
+	/*出错样式定义*/
+	.TableForm input.select{
+		padding:0 10px 0 30px;	/*左右内边距10px*/
+		text-align:left;
+	}
+	/*文本域的特殊定义*/
+	.TableForm textarea {
+		height: auto; /*高度交页面控制*/
+		margin:5px 0;	/*距上下各5px*/
+		overflow: auto;
+	}
+	/*定义日期控件样式*/
+	.TableForm input.Wdate{
+		border: 1px solid #B8CFEE;	/*边框*/
+		height: 20px; line-height: 20px; /*高度*/
+		background:#fff url(../images/datePicker.gif) no-repeat right;
+		width: 100%; /*表单域宽度*/
+		font-size:12px; /*表单域字体*/
+	}
+	/*定义单选框按钮样式*/
+	.TableForm input.radio{
+		width: 18px; /*表单域宽度*/
+		cursor: hand;
+	}
+	/*定义单选框按钮样式*/
+	.TableForm input.checkbox{
+		width: 18px; /*表单域宽度*/
+	}
+	/*定义select样式*/
+	.TableForm select{
+		width: 100%; /*表单域宽度*/
+	}
+	/*按钮*/
+	.TableForm .button{
+		width:auto;border:1px outset #B8CFEE;
+		height:22px;line-height:20px;
+		background:#B8CFEE;
+	}
+	
+	/*以下为对ext部分的样式的设定或修复*/
+	.x-menu-item{text-align:left} /*grid表头菜单内容左对齐*/
+	.x-grid3-cell{border-right:1px solid #ddd;}	/*Grid列边线*/
+ 	.x-grid3-cell-inner,.x-grid3-hd-inner{font-size:12px} /*Grid字体大小*/
+ 	.opendisplay{display: none;}
+ 	.opencol{background-color: ffffff}

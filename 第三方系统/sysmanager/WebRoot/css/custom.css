@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+.x-grid-back-red table {
+	background: #FF0000;
+}
+
+.x-grid-back-green table {
+	background: #008040;
+}
+
+.x-grid-back-yellow table {
+	background: #ffff00;
+}
+
+.button-tree-expand {
+	background-image: url(../image/expand-all.gif) !important;
+}
+
+.button-tree-collapse {
+	background-image: url(../image/collapse-all.gif) !important;
+}
+
+.button-tree-allcheck {
+	background-image: url(../image/icons/tick.png) !important;
+}
+
+.button-tree-allcancel {
+	background-image: url(../image/icons/cross.png) !important;
+}
+
+.x-tree-node-sys {
+	border: 1px solid #fff;
+}
+
+.node-assign-all-cls {
+	background-image: url(../image/icons/award_star_gold_2.png) !important;
+}
+
+.node-assign-some-cls {
+	background-image: url(../image/icons/award_star_silver_3.png) !important
+		;
+}
+
+.node-assign-none-cls {
+	background-image: url(../image/icons/award_star_bronze_1.png) !important
+		;
+}
+
+.user {
+	background-image: url(../image/icons/user.png) !important;
+}
+
+.area {
+	background-image: url(../image/icons/world.png) !important;
+}
+
+.node-system-normal {
+	background-image: url(../image/icons/monitor.png) !important;
+}
+
+.node-system-error {
+	background-image: url(../image/icons/monitor_error.png) !important;
+}
+
+.node-deploynode {
+	background-image: url(../image/icons/server.png) !important;
+}
+
+.node-deploynode-go {
+    background-image: url(../image/icons/server_go.png) !important;
+}
+
+.node-module {
+	background-image: url(../image/icons/package_green.png) !important;
+}
+
+.node-module-bottom {
+	background-image: url(../image/icons/package.png) !important;
+}
+
+.node-operation {
+	background-image: url(../image/icons/bullet_wrench.png) !important;
+}
+
+.x-node-ctx {
+	background: #eee !important;
+	border: 1px solid #ccc !important;
+}
+
+.x-form-pwd-iconCls {
+	background-image: url(../image/icons/application_key.png) !important;
+}

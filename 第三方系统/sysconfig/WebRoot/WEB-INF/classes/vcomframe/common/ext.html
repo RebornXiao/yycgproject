@@ -1,0 +1,167 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>${projectname}</title>
+		<link rel="stylesheet" id="ext-all-css" type="text/css"
+			href="vcomframe/ext/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css"
+			href="vcomframe/css/main.css" />
+		<script type="text/javascript" id="ext-base-js"
+			src="vcomframe/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" id="ext-all-js"
+			src="vcomframe/ext/ext-all.js"></script>
+		<script type="text/javascript" src="vcomframe/ext/manager.js"></script>
+		<script type="text/javascript">
+	var cssid=1;
+	var ____type=0;
+	Ext.BLANK_IMAGE_URL = 'vcomframe/images/s.gif';
+	var path='${path}';
+	var oncontextmenu='${oncontextmenu}';
+	var vcomframe={
+		path:path,
+		allpath:'',
+		sigpath:'',
+		timeout:30000,
+		//combobox
+		manange_alert:'警告',
+		manange_message:'打开的页面超过了限制，请关闭不需要的页面!',
+		combobox_emptyText:'\u8bf7\u9009\u62e9',
+		activecombobox_emptyText:'请输入',
+		treecombobox_emptyText:'\u8bf7\u9009\u62e9',
+		//openwindow
+		openwindow_yes:'确定',
+		openwindow_no:'取消'
+	}
+	function changecss(obj){
+		Ext.onReady(function(){
+			if(cssid==1){
+				Ext.util.CSS.swapStyleSheet("theme", "ext/resources/css/xtheme-gray.css");
+				cssid++;
+			}else if(cssid==2){
+				Ext.util.CSS.swapStyleSheet("theme", "ext/resources/css/xtheme-slickness.css");
+				cssid++;
+			}else {
+				Ext.util.CSS.swapStyleSheet("theme", "ext/resources/css/xtheme-purple.css");
+				cssid=1;
+			}
+		});
+	}
+	var treejson= ${menuTree}
+
+	/*
+	 *值为1表明按照延迟加载的方式显示树结构（第一级为qq面板）、
+	 *值为2表明为异步方式加载树结构（第一级为qq面板）
+	 *值为3表明按照延迟加载方式显示树结构(没有qq面板)
+	 *值为4表明为异步方式加载树结构（没有qq面板）
+	*/
+	var type=${menutype};
+	/*设定打开的tab面板最大个数*/
+	var tabcount=${tabcount};
+	var welcomepage="${welcomepage}"
+	/*如果设定的是延迟方式加载树，则此项必须制定一个url，如果设定的是非延迟加载树，则此项可以设定为null*/
+	var managelayout=new managelayout(type,treejson,tabcount,null,null);
+</script>
+		<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	font-size: 24px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.sysname{
+font-family: "微软雅黑";
+    font-size: 20px;
+    color: #03528a;
+   font-weight: bold;
+   padding-bottom:-10px;
+   width:90%;
+}
+-->
+</style>
+	</head>
+	<body>
+		<div id="loading-mask"></div>
+		<div id="loading">
+			<div class="loading-indicator">
+				<img src="vcomframe/images/extanim32.gif" width="32"
+					height="32" style="margin-right: 8px;" align="absmiddle" />
+				页面加载中，请稍后...
+			</div>
+		</div>
+		<div id="north">
+			<data>
+			<table width="100%" height="60" cellpadding="0" cellspacing="0"
+				background="vcomframe/images/head_line.gif">
+				<tr>
+					<td width="230" height="52">
+						
+					</td>
+					<td valign="middle" class="sysname">
+						药品采购系统后台管理
+					</td>
+					<td valign="bottom" align="right" style="width:10%;">
+						${html}
+					</td>
+				</tr>
+			</table>
+			</data>
+		</div>
+		<div id="west"></div>
+		<div id="east"></div>
+		<div id="south">
+			<div
+				style="float: left; margin: 5px; font: normal 12px tahoma, arial, sans-serif, 宋体;">
+				版权所有:
+				<span style="color: blue">省卫生厅</span>&nbsp;&nbsp;&nbsp;&nbsp;当前用户:
+				<span style="color: blue"> ${user}
+				</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div
+				style="float: right; margin: 5px; font: normal 12px tahoma, arial, sans-serif, 宋体;">
+				<script language="javascript">
+		<!--
+		tmpDate = new Date();
+		date = tmpDate.getDate();
+		month= tmpDate.getMonth() + 1 ;
+		year= tmpDate.getYear();
+		document.write(year);
+		document.write("年");
+		document.write(month);
+		document.write("月");
+		document.write(date);
+		document.write("日 ");
+		
+		myArray=new Array(6);
+		myArray[0]="星期日"
+		myArray[1]="星期一"
+		myArray[2]="星期二"
+		myArray[3]="星期三"
+		myArray[4]="星期四"
+		myArray[5]="星期五"
+		myArray[6]="星期六"
+		weekday=tmpDate.getDay();
+		if (weekday==0 | weekday==6)
+		{
+		document.write(myArray[weekday])
+		}
+		else
+		{document.write(myArray[weekday])
+		};
+		// -->
+		</script><img alt="" src="vcomframe/images/225.gif">
+			</div>
+		</div>
+	</body>
+	<script>
+		   
+		    
+		    	 
+			function checkInput(){
+			    if(confirm('你确定退出？')){
+			    	window.location="vcomframe/admin/user/logout.action";
+				}
+			}
+			 
+		</script>
+</html>

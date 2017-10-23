@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="vcomframe/css/common.css" />
+		<link rel="stylesheet" id='skin' type="text/css" href="vcomframe/list/message/skin/qq/ymPrompt.css" />
+		<script type="text/javascript" src="vcomframe/list/DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="vcomframe/js/common.js"></script>
+		<script type="text/javascript" src="vcomframe/list/message/ymPrompt.js"></script>
+		<script type="text/javascript" src="vcomframe/list/check/formInvalidCheck.js"></script>
+	</head>
+	<body scroll="auto">
+		<form name="contest" onsubmit="search();"
+			action="/netvideo_p2/admin/stationmanager/getRuleMasterListUI.action"
+			method="post">
+			<table width="100%">
+				<TR>
+					<td>
+						<table align="center" width="100%" class="TableForm"
+							cellpadding="3" cellspacing="0">
+							<caption>
+								表单信息
+							</caption>
+							<colgroup>
+								<col width="15%"></col>
+								<col width="35%"></col>
+								<col width="15%"></col>
+								<col width="35%"></col>
+							</colgroup>
+							<tr>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="text" name="username1" maxlength="50" value="" id="username"/>
+								</td>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="text" name="username2" maxlength="50" value="" id="username"/>
+								</td>
+							</tr>
+							<tr>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="radio" name="username" class="radio" id="username"/>正确
+									<input type="radio" name="username" class="radio" id="username"/>正确
+									<input type="radio" name="username" class="radio" id="username"/>正确
+								</td>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="checkbox" name="username" class="checkbox" value="" id="username"/>
+									<input type="checkbox" name="username" class="checkbox" value="" id="username"/>
+									<input type="checkbox" name="username" class="checkbox" value="" id="username"/>
+									<input type="checkbox" name="username" class="checkbox" value="" id="username"/>
+									<input type="checkbox" name="username" class="checkbox" value="" id="username"/>
+								</td>
+							</tr>
+							<tr>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="text" name="username" maxlength="50" value="" id="username"/>
+								</td>
+								<td class="labelTd">
+									管理员名称
+								</td>
+								<td>
+									<input type="text" name="username" maxlength="50" value="" id="username"/>
+								</td>
+							</tr>
+							<tr>
+								<td class="labelTd">
+									创建时间
+								</td>
+								<td>
+									<input id="d4311" class="Wdate" type="text" name="starttime"
+										value=""
+										onFocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+										readonly="readonly" />
+								</td>
+								<td class="labelTd">
+									至
+								</td>
+								<td>
+									<input id="d4312" class="Wdate" type="text" name="endtime"
+										value=""
+										onFocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+										readonly="readonly" />
+
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="4" align="center">
+									<input type="button" class="button" value="[提 交]"
+										onclick="search();">
+									&nbsp;
+									<input class="button" id="resetNote" type="button"
+										value="[重 置]" onclick="resetfrom()">
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			function search(){
+				if(!CheckNotNull(document.all.username1,"用户名")){return false};
+			}
+		</script>
+	</body>
+</html>

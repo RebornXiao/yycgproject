@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Task">
+	<insert id="insertTask" parameterClass="task">
+		insert into DATA_SYN_TASK
+		  (busstype, optusername, operatetype, src_keyname, src_keyvalue, createtime, exectime, status, failurecount, vchar1)
+		values (#serviceType#, #optUserName#, #operationType#,#priKey#,#priValue#,#createTime#,#execTime#,#status#,#failCount#,#address#)  
+	</insert>
+</sqlMap>
+

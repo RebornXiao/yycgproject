@@ -1,0 +1,92 @@
+<!DOCTYPE struts PUBLIC       
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin" extends="mydefault" namespace="/admin">
+        <action name="first" class="zzvcom.sys.action.First" method="first">
+			<result name="success">/vcomframe.frame</result>
+			<result name="error" type="redirectAction">
+			<param name="actionName">loginshow</param>
+			<param name="namespace">/admin</param>
+			</result>
+		</action>
+		<action name="loginshow" class="zzvcom.sys.action.LoginAction" method="index">
+			<result name="success" type="redirect">${fromsysurl}</result>
+		</action>
+		<action name="login" class="zzvcom.sys.action.LoginAction" method="login">
+			<result name="error" type="redirectAction">
+			<param name="actionName">loginshow</param>
+			<param name="namespace">/admin</param>
+			</result>
+			<result name="success" type="redirectAction">
+			<param name="actionName">first</param>
+			<param name="namespace">/admin</param>
+			</result>
+		</action>
+		
+		<action name="quit" class="zzvcom.sys.action.LoginAction" method="quit">
+			<result name="success" type="redirectAction">
+			<param name="actionName">loginshow</param>
+			<param name="namespace">/admin</param>
+			</result>
+			<result name="error" type="redirectAction">
+			<param name="actionName">loginshow</param>
+			<param name="namespace">/admin</param>
+			</result>
+		</action>
+		<action name="getAllUserList" class="zzvcom.sys.action.UserAction" method="getAllUserLists">
+			<result name="success">User_List.jsp</result>
+		</action>
+		<action name="toAddUserPage" class="zzvcom.sys.action.UserAction" method="toAddUserPage">
+			<result name="success">User_Add.jsp</result>
+		</action>
+		<action name="saveUser" class="zzvcom.sys.action.UserAction" method="saveUser">
+			<result name="success" type="chain">getUserObj</result>
+			<result name="error">/common/error_custom.jsp</result>
+		</action>
+		<action name="getUserObj" class="zzvcom.sys.action.UserAction" method="getUserObj">
+			<result name="success">User_Edit.jsp</result>
+			<result name="error">/common/error_custom.jsp</result>
+		</action>
+		<action name="updateUser" class="zzvcom.sys.action.UserAction" method="updateUser">
+			<result name="success">/common/success_custom.jsp</result>
+			<result name="error">/common/error_custom.jsp</result>
+		</action>
+		<action name="toEditPwd" class="zzvcom.sys.action.UserAction" method="toEditPwd">
+			<result name="success">User_EditPwd.jsp</result>
+		</action>
+		<action name="editPwd" class="zzvcom.sys.action.UserAction" method="editPwd">
+			<result name="success">User_EditPwd.jsp</result>
+		</action>
+		<action name="delCheck" class="zzvcom.sys.action.UserAction" method="delCheck">
+		</action>
+		<action name="delUser" class="zzvcom.sys.action.UserAction" method="delUser">
+			<result name="success" type="chain">getAllUserList</result>
+		</action>
+		<action name="initPWDByUser" class="zzvcom.sys.action.UserAction" method="initPWDByUser">
+			<result name="success" type="chain">getAllUserList</result>
+		</action>
+		<action name="codeCheck" class="zzvcom.sys.action.UserAction" method="codeCheck">
+		</action>
+		
+		
+		<!-- 
+		<action name="sysmnglogin" class="zzvcom.sys.action.SysMngLoginAction" method="login">
+			<result name="error" type="redirect">${jwglurl}</result>
+			<result name="success">/vcomframe.frame</result>
+		</action>
+		 -->
+		
+		<!-- 
+		<action name="index" class="zzvcom.sys.action.LoginAction" method="index">
+			<result name="success">User_Login.jsp</result>
+		</action>
+		 -->
+		
+		<!-- 权限维护页面 -->
+		<action name="getUserPermissions" class="zzvcom.sys.action.UserAction" method="getUserPermissions">
+			<result name="success">User_Permissions.jsp</result>
+		</action>
+	</package>
+</struts>
+

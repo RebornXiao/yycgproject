@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="System">
+	<sql id="select-all-system">
+		select t.sysid     as systemId,
+		       t.sysname   as systemName,
+		       t.url       as url,
+		       t.icon      as icon,
+		       t.showorder as showOrder
+		  from BSS_SYS_SYSTEM t
+		  where 1=1
+	</sql>
+    <sql id="order-by-systemId">order by t.sysid</sql>
+    
+    <select id="getSystemById" parameterClass="string" resultClass="system">
+        <include refid="select-all-system"/>
+        and t.sysid = #systemId#
+    </select>
+    <select id="getSystemByName" parameterClass="string" resultClass="system">
+        <include refid="select-all-system"/>
+        and t.sysname = #systemName#
+    </select>
+    
+    <select id="getAllSystemList" resultClass="system">
+        <include refid="select-all-system"/>
+        <include refid="order-by-systemId"/>
+    </select>
+    
+    <select id="getRoleSystemList" parameterClass="string" resultClass="system">
+        <include refid="select-all-system"/>
+        and t.sysid in (select rs.sysid from BSS_SYS_ROLESYS rs where rs.roleid = #roleId#)
+        <include refid="order-by-systemId"/>
+    </select>
+    
+    <select id="getSystemByDeployNodeId" parameterClass="string" resultClass="system">
+        <include refid="select-all-system"/>
+        and t.sysid in (select t.sysid from BSS_SYS_DEPLOYNODE t where t.nodeid = #deployNodeId#)
+    </select>
+    
+    <insert id="insertSystem" parameterClass="system">
+        insert into BSS_SYS_SYSTEM (sysid,sysname,showorder) values (#systemId#, #systemName#, #showOrder#)
+    </insert>
+</sqlMap>
+

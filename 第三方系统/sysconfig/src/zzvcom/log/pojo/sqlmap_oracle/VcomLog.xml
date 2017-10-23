@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="vcomlog">
+
+	<select id="getRoleByIds"
+		resultClass="zzvcom.sys.pojo.VcomSysRole">
+		select * from vcom_sys_role m order by m.sort asc
+	</select>
+	<select id="getLogList" resultClass="zzvcom.log.pojo.VcomSysLog"
+		parameterClass="map">
+		select id, userName, userIP, operateDate, source, operateClass,
+		errorDescription, messages from vcom_sys_log
+		<dynamic prepend="where">
+			<isNotEmpty property="source" prepend="and">
+				source=#source#
+			</isNotEmpty>
+			<isNotEmpty property="userIp" prepend="and">
+				userIP like '%$userIp$%'
+			</isNotEmpty>
+
+
+
+			<isNotEmpty prepend="and" property="startTime">
+				<![CDATA[operateDate>=to_date(#startTime#,'YYYY-MM-DD hh24:mi:ss') ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				<![CDATA[operateDate<=to_date(#endTime#,'YYYY-MM-DD hh24:mi:ss') ]]>
+			</isNotEmpty>
+
+		</dynamic>
+		order by id desc
+		
+	</select>
+
+	<select id="getLogListCount" resultClass="int"
+		parameterClass="map">
+		select count(*) from vcom_sys_log
+		<dynamic prepend="where">
+			<isNotEmpty property="source" prepend="and">
+				source=#source#
+			</isNotEmpty>
+			<isNotEmpty property="userIp" prepend="and">
+				userIP like '%$userIp$%'
+			</isNotEmpty>
+
+			<isNotEmpty prepend="and" property="startTime">
+				<![CDATA[operateDate>=to_date(#startTime#,'YYYY-MM-DD hh24:mi:ss') ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				<![CDATA[operateDate<=to_date(#endTime#,'YYYY-MM-DD hh24:mi:ss') ]]>
+			</isNotEmpty>
+
+
+		</dynamic>
+
+
+	</select>
+
+	<delete id="deleteLogByTime" parameterClass="string">
+		delete from vcom_sys_log where
+		<![CDATA[operateDate<=to_date(#endTime#,'YYYY-MM-DD hh24:mi:ss') ]]>
+
+	</delete>
+
+	<!--  插入操作-->
+	<insert id="create" parameterClass="zzvcom.log.pojo.VcomSysLog">
+		<selectKey resultClass="long" keyProperty="id">
+			select SEQ_SYS_LOG.nextval  as value  from dual     
+		</selectKey>
+		insert into vcom_sys_log (id, userName, userIP, operateDate,
+		source, operateClass, errorDescription, messages ) values (#id#,
+		#userName#, #userIp#, #operateDate#, #source#, #operateClass#,
+		#errorDescription#, #messages# )
+	</insert>
+</sqlMap>

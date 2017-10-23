@@ -1,0 +1,20 @@
+<!DOCTYPE struts PUBLIC       
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="log" extends="mydefault" namespace="/log">
+		<action name="getLogPageUI"
+			class="zzvcom.log.action.VcomSysLogAction" method="getLogPageUI">
+			<result name="success">Log_list.jsp</result>
+		</action>
+		<action name="deleteLogBatch"
+			class="zzvcom.log.action.VcomSysLogAction" method="deleteLogBatch">
+			<result name="success">Log_Del.jsp</result>
+		</action>
+		<action name="toBatchDelLogPage"
+			class="zzvcom.log.action.VcomSysLogAction" method="toBatchDelLogPage">
+			<result name="success">Log_Del.jsp</result>
+		</action>
+	</package>
+</struts>
+

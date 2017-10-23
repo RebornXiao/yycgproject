@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> New Document </TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<script language="javascript" src="vcomframe/list/select/select.js"></script>
+<script type="text/javascript" src="vcomframe/js/common.js"></script>
+</HEAD>
+<BODY>
+<table border="1" style="border-collapse:collapse ">
+  <tr>
+    <td width="300"><select name=test1>
+      <option value="可编辑下拉框1" selected>可编辑下拉框1</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+ <INPUT TYPE="button" value="获取编辑框1的值" onclick="alert(document.getElementById('username').value)">
+ </td>
+    <td width="109"><select name=test2>
+      <option value="可编辑下拉框2">可编辑下拉框25555555</option>
+      <option value="1">4</option>
+      <option value="2" selected>5</option>
+      <option value="3">6</option>
+    </select> 
+ </td>
+    <td width="343">
+  <INPUT TYPE="button" value="获取编辑框2的值" onclick="alert(document.getElementById('password').value)">
+ </td>
+  </tr>
+</table>
+<script language="javascript">
+ var a=new combox("username","test1");
+ //参数1为新生成输入框的名称
+ //参数2为原来的select对象名称
+ a.init(a);
+ var b=new combox("password","test2");
+ b.init(b);
+</script>
+<div style="top:700px;margin-left:100px;font-family: verdana;font-size: 9pt;border-width:1px;border-color: #caa700;border-style: solid;background-color: #ffffa2;padding: 4;margin: 0;">
+    <pre>
+    <b>一、功能简介</b><br>
+     可编辑下拉框支持简单的输入和选择两种功能，不支持输入的级联过滤等动作。
+
+    <b>二、使用说明</b>  <br>
+     1、在页面中引入vcomframe/list/select/select.js文件
+      2.  使用并设置属性
+         var a=new combox("username","test1");
+ 				//参数1为新生成输入框的名称
+ 				//参数2为原来的select对象名称
+ 			a.init(a);
+  </div>
+</BODY>
+</HTML>

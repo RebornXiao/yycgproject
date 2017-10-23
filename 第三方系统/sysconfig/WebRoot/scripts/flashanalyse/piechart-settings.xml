@@ -1,0 +1,64 @@
+<settings>
+	<data_type>csv</data_type>
+	<pie>
+		<radius>100</radius>
+		<inner_radius>0</inner_radius>
+		<height>18</height>
+		<angle>45</angle>
+	</pie>
+	<animation>
+		<start_time>2</start_time>
+		<start_effect>strong</start_effect>
+		<pull_out_time>1.5</pull_out_time>
+	</animation>
+	<data_labels>
+		<radius>-50</radius>
+		<text_color>#000000</text_color>
+		<show><![CDATA[{title}:{percents}%]]></show>
+	</data_labels>
+	
+	
+	<balloon>                                                   <!-- BALLOON -->
+    <enabled></enabled>                                       <!-- [true] (true / false) -->
+    <color></color>                                           <!-- [] (hex color code) balloon background color. If empty, slightly darker then current slice color will be used -->
+    <alpha></alpha>                                           <!-- [80] (0 - 100) -->
+    <text_color></text_color>                                 <!-- [#FFFFFF] (hex color code) -->
+    <text_size></text_size>                                   <!-- [text_size] (Number) -->    
+    <show>
+       <![CDATA[{title}:{percents}%({value}MB)]]>        <!-- [{title}: {percents}% ({value}) <br>{description}] ({value} {title} {percents} {description}) You can format any data label: {value} - will be replaced with value and so on. You can add your own text or html code too. -->
+    </show>
+    <max_width></max_width>                                   <!-- [220] (Number) The maximum width of a balloon -->
+    <corner_radius></corner_radius>                           <!-- [0] (Number) Corner radius of a balloon. If you set it > 0, the balloon will not display arrow -->
+    <border_width></border_width>                             <!-- [0] (Number) -->
+    <border_alpha></border_alpha>                             <!-- [balloon.alpha] (Number) -->
+    <border_color></border_color>                             <!-- [balloon.color] (hex color code) -->    
+  </balloon>
+	
+	
+	<legend>
+		<enabled>false</enabled>
+	</legend>
+	<labels>
+		<label>
+			<x>0</x>
+			<y>30</y>
+			<align>center</align>
+			<text_size>15</text_size>
+			<text></text>
+		</label>
+	</labels>
+	
+	<animation>
+    <start_time></start_time>                                <!-- [0] (Number) fly-in time in seconds. Leave 0 to appear instantly -->
+    <start_effect></start_effect>                       <!-- [bounce] (bounce, regular, strong) -->
+    <start_radius></start_radius>                             <!-- [500%] (Number / Number%) if left empty, will use pie.radius * 5 -->
+    <start_alpha>0</start_alpha>                              <!-- [0] (Number) -->
+    <sequenced>true</sequenced>                               <!-- [false] (true / false) Whether the slices should appear all together or one after another -->                    
+    <pull_out_on_click>true</pull_out_on_click>              <!-- [true] (true / false) whether to pull out slices when user clicks on them (or on legend entry) -->
+    <pull_out_time></pull_out_time>                        <!-- [0] (number) pull-out time (then user clicks on the slice) -->
+    <pull_out_effect></pull_out_effect>                 <!-- [bounce] (bounce, regular, strong) -->
+    <pull_out_radius></pull_out_radius>                       <!-- [20%] (Number / Number%) how far pie slices should be pulled-out then user clicks on them -->
+    <pull_out_only_one>true</pull_out_only_one>                   <!-- [false] (true / false) if set to true, when you click on any slice, all other slices will be pushed in -->        
+  </animation>
+</settings>
+

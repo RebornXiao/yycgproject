@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>    
+	<background>
+		<color>#FFFFFF,#FF9E01</color>
+		<alpha>100</alpha>
+	</background>
+	<labels>
+		<label>
+			<y>24</y>
+			<width>520</width>
+			<align>center</align>
+			<text></text>
+		</label>
+	</labels>
+<plot_area>
+    <color></color>
+    <alpha></alpha>
+    <border_color></border_color>
+    <margins>
+      <top>10</top>
+      <left>80</left>
+      <right></right>
+      <bottom>50</bottom>
+    </margins>
+</plot_area>
+  <legend>                     
+    <enabled>false</enabled>   
+  </legend>
+</settings>

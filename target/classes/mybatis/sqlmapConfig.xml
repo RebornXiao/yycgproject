@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 在这里配置mybatis的setting参数 -->
+<!-- <settings>
+<setting name="cacheEnabled" value="true"/>
+<setting name="lazyLoadingEnabled" value="true"/>
+</settings> -->
+
+<!-- mapper.xml文件如果和mapper.java接口在一个目录则此处不用定义 -->
+<!-- <mappers>
+ <mapper resource="yycg/base/dao/sqlmap/SysuserSqlmap.xml" />
+</mappers> -->
+</configuration>

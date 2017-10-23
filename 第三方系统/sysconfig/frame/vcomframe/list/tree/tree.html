@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>customtree.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css"href="vcomframe/list/tree/tree.css" />
+		<script type="text/javascript" src="vcomframe/list/tree/xtree.js"></script>
+	</head>
+	<body>
+		<script>
+		// 1-栏目设置；2-对应关系设置；3-规则设置;4-视频列表
+		var menutype="1";
+		    //用户点击站点节点
+		    function openStaionIframe(obj){
+		        if(1==menutype){//展开栏目列表
+		             openChannelList(obj)
+		        }else if(3==menutype||2==menutype){//给出提示页面,要求用户选择栏目或站点；
+		           if(2==menutype)
+		            // alert("请选择栏目！");
+		           
+		            toTipPage();
+		        }
+		        
+				 
+			}
+			 //用户点击栏目节点
+		    function openChannelIframe(obj,type){
+		        if(2==menutype){	//设置对应关系设置
+		             toEditChannelRelationAndAuditWayPage(obj)
+		        }else if(4==menutype){
+		          alert("waiting");
+		        }else if(3==menutype||1==menutype){
+		            if(1==type){
+		                alert("此栏目暂时不可配置规则！");
+		            }else{
+		              if(3==menutype)//打开规则配置页
+		                   openConfigPage(obj);
+		              else{
+		                 openChannelDetail(obj);
+		              }
+		              
+		            }
+		        
+		        }
+		        
+		        
+				 
+			}
+			/**************************************************/
+			
+		
+		    function openChannelDetail(obj){
+				//parent.centerframe.location="/netvideo_p2/admin/stationmanager/toAddOrEditChannelPage.action?editFlag=true&configFlag=true&channelid="+obj;
+				parent.centerframe.location="/netvideo_p2/admin/stationmanager/getChannelDetail.action?channelid="+obj;
+			}
+			function openChannelList(obj){
+				parent.centerframe.location="/netvideo_p2/admin/stationmanager/getChannelListUI.action?status=&stationid="+obj;
+			}
+			function openConfigPage(obj){
+				parent.centerframe.location="/netvideo_p2/admin/stationmanager/toAddOrEditConfigPage.action?channelid="+obj;
+			}
+			function toEditChannelRelationAndAuditWayPage(obj){
+				parent.centerframe.location="/netvideo_p2/admin/stationmanager/toEditChannelRelationAndAuditWayPage.action?editFlag=true&channelid="+obj;
+			}
+			function toTipPage(){
+				parent.centerframe.location="/netvideo_p2/admin/stationmanager/toTipPage.action?menutype=1";
+			}
+		var rootTree = new WebFXTree('站点栏目',null,'other');
+ var m_area_1 = WebFXTreeItem("1听MTV", "javascript:openStaionIframe(15)",null,'s_15',null,null,null,"<input type='checkbox' name='ddd'>");
+ rootTree.add(m_area_1);
+ var m_area_2 = WebFXTreeItem("1听MTV", "javascript:openStaionIframe(15)",null,'s_15',null,null,null,"<input type='checkbox' name='ddd'>");
+ m_area_1.add(m_area_2);document.write(rootTree);
+rootTree.expand();
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <title>My JSP 'filemanage.jsp' starting page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" type="text/css" href="vcomframe/css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="vcomframe/css/common.css" />
+	<link rel="stylesheet" id="ext-all-css" type="text/css" href="vcomframe/ext/resources/css/ext-all.css" />
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  <body>
+  				<div id="loading-mask"></div>
+				<div id="loading">
+					<div class="loading-indicator">
+						<img src="vcomframe/images/extanim32.gif" width="32" height="32"
+							style="margin-right:8px;" align="absmiddle" />
+						页面加载中，请稍后...
+					</div>
+				</div>
+  				<script type="text/javascript" src="vcomframe/ext/adapter/ext/ext-base.js"></script>
+				<script type="text/javascript" src="vcomframe/ext/ext-all.js"></script>
+				<script type="text/javascript" src="vcomframe/ext/ComboBox.js"></script>
+				<script type="text/javascript" src="vcomframe/ext/windows.js"></script>
+				<script type="text/javascript" src="vcomframe/ext/formInvalidCheck.js"></script>
+  				<table width="100%">
+					<tr>
+						<td>
+							<form name="myform" method="post" action="vcomframe/mbbAdd.action" enctype="multipart/form-data">
+							<table align="center" class="TableForm" cellpadding="3" cellspacing="0">
+								<colgroup>
+									<col width="15%"></col>
+									<col width="35%"></col>
+									<col width="15%"></col>
+									<col width="35%"></col>
+								</colgroup>
+								<tr>
+									<td class="labelTd">模板包名称<span class="star">*</span></td>
+									<td colspan="3"><input id="name" type="text" value="" name="name"></td>
+								</tr>
+								<tr>
+									<td class="labelTd">上传文件<span class="star">*</span></td>
+									<td colspan="3"><input type="file" value="" name="myfile" contentEditable="false"></td>
+								</tr>
+								<tr>
+									<td class="labelTd">终端类型<span class="star">*</span></td>
+									<td><div id="terminal"></div></td>
+									<td class="labelTd">分类<span class="star">*</span></td>
+									<td><div id="typeall"></div></td>
+								</tr>
+							</table>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<script>
+					var value2=[{value:"1", text:"TV"},{value:"2", text:"PC"}, {value:"3", text:"WAP"}];
+					var combobox2=new combobox("terminal","终端类型",value2,"combobox2",190,210,null,false);
+					var type="N";
+					var treejson= [
+								{text:"运营",icon:"vcomframe/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:2,
+														children:[{text:"模板包",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:21,
+																	children:[{text:"框架EPG",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,disabled:type=="N"?true:false,draggable:false,id:211},
+																					{text:"频道",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:212,
+																						children:[{text:"点播",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2121},
+																									{text:"直播",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2122},
+																									{text:"虚拟",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:2123}
+																								]
+																					}
+																				]
+																	},
+																	
+																	{text:"专题包",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:false,draggable:false,id:22,
+																		children:[
+																					{text:"静态",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:222}
+																				]	
+																	}
+																	]
+												},
+								{text:"图文",icon:"vcomframe/images\/im2.gif",depth:1,parentid:0,leaf:false,draggable:false,id:1,
+										children:[{text:"模板包",href:"rightmenu.html",icon:"vcomframe/images\/im2.gif",depth:3,parentid:1,leaf:true,draggable:false,id:11}]
+												}
+									]
+					var treecombobox=new treecombobox("typeall","所属类别",190,250,treejson,null,null,false,false,true);
+					/*保存模板包*/
+				    function tosave(){
+				    	/*验证标题是否为空*/
+						if(!CheckNotNull(myform.name,"根据你的需求，模板包名称不能为空!")){return false;};
+						if(!CheckStringLength(myform.name,"根据你的需求，模板包名称不能超过30个字符!",0,30)){return false;};
+						/*验证上传文件是否为空*/
+						if(!CheckNotNull(myform.myfile,"根据你的需求，请选择要上传的文件!")){return false;};
+						if(!CheckEndWith(myform.myfile,"根据你的需求，上传文件必须是ZIP格式!",".zip")){return false;};
+						/*验证终端类型是否为空*/
+						if(!CheckSelectNotNull(combobox2,"根据你的需求，请选择终端类型!")){return false;};
+						/*验证类型是否为空*/
+						if(!CheckSelectNotNull(treecombobox,"根据你的需求，请选择模板包类型!")){return false;};
+						/*添加百分比滚动条*/
+						parent.ProgressBegin();
+						myform.submit();
+						parent.mbbselect="";
+						parent.page="1";
+				    } 
+				</script>
+  </body>
+</html>

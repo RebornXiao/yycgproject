@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="vcomoper">
+
+	<select id="getOperationListByModuleid"
+		resultClass="zzvcom.sys.pojo.VcomSysOperation" parameterClass="map">
+		select * from vcom_sys_operation
+
+
+		<dynamic prepend="where">
+			<isNotEmpty property="moduleid" prepend="and">
+				moduleid=#moduleid#
+			</isNotEmpty>
+			<isNotEmpty property="opername" prepend="and">
+				opername like '%$opername$%'
+			</isNotEmpty>
+		</dynamic>
+		order by sort asc
+		<isNotEmpty property="start">limit #start#, #end#</isNotEmpty>
+	</select>
+	<select id="getOperationListCountByModuleid" resultClass="int"
+		parameterClass="map">
+		select count(*) from vcom_sys_operation where
+		moduleid=#moduleid# and opername like '%$opername$%'
+	</select>
+
+
+
+	<select id="getOperationListByIds"
+		resultClass="zzvcom.sys.pojo.VcomSysOperation" parameterClass="map">
+		select * from vcom_sys_operation
+
+
+		<dynamic prepend="where">
+			<isNotEmpty property="inIds">id in($inIds$)</isNotEmpty>
+			<isNotEmpty property="notinIds">
+				id not in($notinIds$)
+			</isNotEmpty>
+		</dynamic>
+		order by sort asc
+
+	</select>
+
+	<select id="isContainOpername" resultClass="int"
+		parameterClass="map">
+		select count(*) from vcom_sys_operation where
+		moduleid=#moduleid# and opername =#opername#
+
+		<isGreaterEqual compareValue="0" property="exceptid">
+			and id!= #exceptid#
+		</isGreaterEqual>
+
+	</select>
+
+	<!--  插入操作-->
+	<insert id="create"
+		parameterClass="zzvcom.sys.pojo.VcomSysOperation">
+		insert into vcom_sys_operation ( opername, moduleid, opercode,
+		method, remark, createtime, updatetime, sort ) values (
+		#opername#, #moduleid#, #opercode#, #method#, #remark#,
+		#createtime#, #updatetime#, #sort# )
+	</insert>
+	<delete id="delete" parameterClass="long">
+		delete from vcom_sys_operation where id = #id#
+	</delete>
+
+	<!--  -->
+	<select id="query" resultClass="zzvcom.sys.pojo.VcomSysOperation"
+		parameterClass="long">
+		select * from vcom_sys_operation m where id=#id#
+
+	</select>
+	<update id="update">
+
+		update vcom_sys_operation set
+
+		opername = #opername# , opercode = #opercode# , method =
+		#method# , remark = #remark# ,
+
+		updatetime = #updatetime# , sort = #sort#
+
+		where id = #id#
+
+	</update>
+</sqlMap>

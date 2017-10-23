@@ -1,0 +1,12 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean name="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
+		<property name="contentType" value="application/json;charset=UTF-8" />
+	</bean>
+	<bean name="jsonTreeView" class="com.zzvcom.sysmag.web.view.JsonTreeView">
+		<property name="contentType" value="application/json;charset=UTF-8" />
+	</bean>
+</beans>
+

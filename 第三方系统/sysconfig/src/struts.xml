@@ -1,0 +1,53 @@
+<!DOCTYPE struts PUBLIC       
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!-- 公共请求操作拦截器位置 ，所有的action包继承mydefault-->
+	<package name="mydefault" extends="struts-default">
+		<interceptors>
+			<!-- 添加日志的拦截器 -->
+			<interceptor name="log" class="zzvcom.log.util.LogInterceptor"/>
+			<!-- 添加权限的拦截器 -->
+			<interceptor name="permission" class="zzvcom.sys.util.filter.PermissionInterceptor"/>
+			<interceptor name="login" class="zzvcom.sys.util.filter.LoginInterceptor"/>
+			<interceptor-stack name="mydefault">
+			    <interceptor-ref name="paramsPrepareParamsStack"/>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- <interceptor-ref name="log"></interceptor-ref> -->
+				<interceptor-ref name="permission"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="mydefault2">
+			    <interceptor-ref name="paramsPrepareParamsStack"/>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- <interceptor-ref name="log"></interceptor-ref> -->
+				<interceptor-ref name="login"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		
+		<!-- 添加权限和日志的拦截器 -->
+		<default-interceptor-ref name="mydefault2"></default-interceptor-ref>
+		<!-- 超时公共返回页面 -->
+		<global-results>
+			<result name="sessionNotValid">/admin/common/SessionNotValid.jsp</result>
+			<result name="loginshow" type="redirectAction">
+			<param name="actionName">loginshow</param>
+			<param name="namespace">/admin</param>
+			</result>
+			<result name="success">/common/success.jsp</result>	
+			<result name="error">/common/error.jsp</result>
+			<result name="actionError">/common/error.jsp</result>
+			<result name="input">/common/error.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+     		<exception-mapping exception="java.lang.Exception" result="actionError"/>
+    	</global-exception-mappings>
+	</package>
+	<include file="strutsconfig/struts_user.xml" />
+    <include file="strutsconfig/struts_module.xml" />
+    <include file="strutsconfig/struts_role.xml" />
+    <include file="strutsconfig/struts_log.xml" />
+</struts>
+

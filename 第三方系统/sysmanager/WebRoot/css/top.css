@@ -1,0 +1,87 @@
+a,a:link,a:visited,li.fs a.fdleft:hover,li.fd_mg a.fdleft:hover {
+	color: #1e5494;
+}
+
+td,input,select,body {
+	font-family: Verdana;
+	font-size: 12px;
+}
+
+.topbg {
+	float: right;
+	width: 486px;
+	height: 66px;
+}
+
+.setinfo {
+	height: 23px;
+	margin: 8px 8px 0 0;
+	text-align: right;
+}
+
+.addrtitle {
+	color: #798699;
+}
+
+.lgoo {
+	position: absolute;
+	left: 5px;
+	z-index: 1;
+}
+
+.imglogo {
+	background: url(../image/logo_1.gif);
+	width: 202px;
+	height: 60px;
+}
+
+.topbg {
+	float: right;
+	background: url(../image/top_bg.jpg) top right no-repeat;
+}
+
+.switch {
+	position: absolute;
+	top: 12px;
+	left: 212px;
+	line-height: 18px;
+}
+
+.setinfo {
+	height: 23px;
+	margin: 8px 8px 0 0;
+	text-align: right;
+}
+
+.myinfo {
+	float: right;
+	white-space: nowrap;
+}
+
+.somail {
+	float: right;
+	margin-top: -5px;
+}
+
+.somail .btn {
+	font-weight: normal
+}
+
+.tipbg {
+	background-color: transparent;
+	margin: 0;
+	padding: 0
+}
+
+.toplineimg {
+	width: 184px;
+	height: 22px;
+}
+
+.navbar {
+	width: 179px;
+	height: 107px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}

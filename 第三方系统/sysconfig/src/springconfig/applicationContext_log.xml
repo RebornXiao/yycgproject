@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-autowire="byName" xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 日志组件配置 -->
+	<!-- dao层实现 -->
+	<bean id="vcomSysLogDao" class="zzvcom.log.dao.impl.VcomSysLogDaoImpl">
+	</bean>
+	<!-- 服务层实现 -->
+	<bean id="vcomSysLogService" class="zzvcom.log.service.impl.VcomSysLogServiceImpl">
+		<property name="vcomSysLogDao" ref="vcomSysLogDao"></property>
+	</bean>
+</beans>

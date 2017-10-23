@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Auth">
+    <resultMap class="java.util.HashMap" id="assigned">
+        <result property="full" column="FULL" javaType="int"/>
+        <result property="assign" column="ASSIGN" javaType="int"/>
+    </resultMap>
+
+    <sql id="getAuthSystem">
+        select t.sysid from bss_sys_rolesys t where t.roleid = #roleId#
+    </sql>
+    <sql id="getAuthNode">
+		select distinct au.nodeid
+		  from role_auth au
+		 where au.roleid = #roleId#
+		   and au.sysid = #systemId#        
+    </sql>
+    <sql id="getAuthModule">
+		select distinct au.moduleid
+		  from role_auth au
+		 where au.roleid = #roleId#
+		   and au.sysid = #systemId#
+		   and au.nodeid = #deployNodeId#    
+    </sql>
+    <select id="getAuthOperation">
+		select distinct au.operateid
+		  from role_auth au
+		 where au.roleid = #roleId#
+		   and au.sysid = #systemId#
+		   and au.nodeid = #moduleId#
+		   and au.moduleid = #operationId#    
+    </select>
+    
+    <select id="getAuthSystemIds" parameterClass="string" resultClass="string">
+        select t.sysid from bss_sys_rolesys t where t.roleid = #roleId#
+    </select>
+    <select id="getAuthDeployNodeIds" parameterClass="map" resultClass="string">
+		select rn.nodeid
+		  from bss_sys_rolesys rs, bss_sys_rolenode rn
+		 where rs.rsid = rn.rsid
+		   and rs.roleid = #roleId#
+		   and rs.sysid = #systemId#  
+    </select>
+    <select id="getAuthModuleIds" parameterClass="map" resultClass="string">
+        select distinct au.moduleid
+          from role_auth au
+         where au.roleid = #roleId#
+           and au.sysid = #systemId#
+           and au.nodeid = #deployNodeId#      
+    </select>
+    <select id="getAuthOperationIds" parameterClass="map" resultClass="string">
+        select distinct au.operateid
+          from role_auth au
+         where au.roleid = #roleId#
+           and au.sysid = #systemId#
+           and au.nodeid = #deployNodeId#
+           and au.moduleid = #moduleId#     
+    </select>
+    
+    <typeAlias alias="authMetaData" type="com.zzvcom.sysmag.pojo.AuthMetaData"/>
+    <typeAlias alias="treeNode" type="com.zzvcom.sysmag.pojo.TreeNode"/>
+    
+    <select id="getAuthSystemId" parameterClass="map" resultClass="string">
+       select rs.rsid from bss_sys_rolesys rs where rs.roleid = #roleId# and rs.sysid = #systemId#
+    </select>
+    
+    <select id="getAuthDeployNodeId" parameterClass="map" resultClass="string">
+       select t.rnid from bss_sys_rolenode t where t.rsid = #rsId# and t.nodeid = #nodeId# 
+    </select>  
+     
+    <select id="getAuthModuleId" parameterClass="map" resultClass="string">
+       select t.rmid from bss_sys_rolemodule t where t.rnid = #rnId# and t.moduleid = #moduleId# 
+    </select>
+    
+    <select id="getAuthOperationId" parameterClass="map" resultClass="string">
+       select t.roid from bss_sys_roleoperate t where t.rmid = #rmId# and t.operateid = #operationId#
+    </select>
+    
+    
+    <select id="getSystemIdByAuthId" parameterClass="string" resultClass="string">
+        select t.sysid from bss_sys_rolesys t where t.rsid = #rsId#
+    </select>       
+    <select id="getDeployIdByAuthId" parameterClass="string" resultClass="string">
+		select t.nodeid from bss_sys_rolenode t where t.rnid = #rnId#  
+    </select>
+    <select id="getModuleIdByAuthId" parameterClass="string" resultClass="string">
+		select t.moduleid from bss_sys_rolemodule t where t.rmid = #rmId#     
+    </select>
+    
+    <select id="getAssignedDeployNode" parameterClass="map" resultMap="assigned">
+		select count(au_all.nodeid)
+		  full, count(au_curr.assigned) assign
+		  from (
+		  <dynamic>
+		      <isEqual property="loginRoleId" compareValue="0">
+		          select dn.nodeid from bss_sys_deploynode dn where dn.sysid = #systemId#
+		      </isEqual>
+		      <isNotEqual property="loginRoleId" compareValue="0">
+				  select distinct au1.nodeid
+				    from role_auth au1
+				   where au1.roleid = #loginRoleId#
+				     and au1.sysid = #systemId#		          
+		      </isNotEqual>
+		  </dynamic>
+		  ) au_all,
+		       (select distinct au2.nodeid, 'yes' assigned
+		          from role_auth au2
+		         where au2.roleid = #assignedRoleId#
+		           and au2.sysid = #systemId#) au_curr
+		 where au_all.nodeid = au_curr.nodeid(+)  
+    </select>    
+    <select id="getAssignedModule" parameterClass="map" resultMap="assigned">
+		select count(au_all.moduleid)
+		  full, count(au_curr.assigned) assign
+		  from (
+		  <dynamic>
+              <isEqual property="loginRoleId" compareValue="0">
+                  select m.moduleid from bss_sys_module m where m.sysid = #systemId#
+              </isEqual>
+              <isNotEqual property="loginRoleId" compareValue="0">
+                  select distinct au1.moduleid
+                          from role_auth au1
+                         where au1.roleid = #loginRoleId#
+                           and au1.sysid = #systemId#
+                           and au1.nodeid = #deployNodeId#              
+              </isNotEqual>		
+		  </dynamic>
+		  ) au_all,
+		       (select distinct au2.moduleid, 'yes' assigned
+		          from role_auth au2
+		         where au2.roleid = #assignedRoleId#
+		           and au2.sysid = #systemId#
+		           and au2.nodeid = #deployNodeId#) au_curr
+		 where au_all.moduleid = au_curr.moduleid(+)    
+    </select>
+    <select id="getAssignedOperation" parameterClass="map" resultMap="assigned">
+		select count(au_all.operateid)
+		  full, count(au_curr.assigned) assign
+		  from (
+          <dynamic>
+              <isEqual property="loginRoleId" compareValue="0">
+				select distinct t.operateid
+				  from bss_sys_operate t
+				 where t.moduleid in
+				       (select tt.moduleid from bss_sys_module tt where tt.sysid = #systemId#)
+              </isEqual>
+              <isNotEqual property="loginRoleId" compareValue="0">
+				select distinct au1.operateid
+				  from role_auth au1
+				 where au1.roleid = #loginRoleId#
+				   and au1.sysid = #systemId#
+				   and au1.nodeid = #deployNodeId#
+              </isNotEqual>     
+          </dynamic>		  
+		 ) au_all,
+		       (select distinct au2.operateid, 'yes' assigned
+		          from role_auth au2
+		         where au2.roleid = #assignedRoleId#
+		           and au2.sysid = #systemId#
+		           and au2.nodeid = #deployNodeId#) au_curr
+		 where au_all.operateid = au_curr.operateid(+)   
+    </select>    
+    
+    <insert id="insertSystemAuth" parameterClass="map">
+        <selectKey resultClass="string" keyProperty="rsId">
+            select sys_guid() AS rsId FROM DUAL
+        </selectKey>
+        insert into bss_sys_rolesys (rsid, roleid, sysid) values (#rsId#, #roleId#, #systemId#)
+    </insert>
+    <insert id="insertDeployNodeAuth" parameterClass="map">
+        <selectKey resultClass="string" keyProperty="rnId">
+            select sys_guid() AS rnId FROM DUAL
+        </selectKey>
+        insert into bss_sys_rolenode (rnid, rsid, nodeid) values (#rnId#, #rsId#, #deployNodeId#)
+    </insert>
+    <insert id="insertModuleAuth" parameterClass="map">
+        <selectKey resultClass="string" keyProperty="rmId">
+            select sys_guid() AS rmId FROM DUAL
+        </selectKey>
+        insert into bss_sys_rolemodule (rmid, rnid, moduleid) values (#rmId#, #rnId#, #moduleId#)    
+    </insert>
+    <insert id="insertOperationAuth" parameterClass="map">
+        <selectKey resultClass="string" keyProperty="roId">
+            select sys_guid() AS roId FROM DUAL
+        </selectKey>
+        insert into bss_sys_roleoperate (roid, rmid, operateid) values (#roId#, #rmId#, #operationId#)    
+    </insert>
+    
+    
+    <delete id="deleteSystemAuth" parameterClass="map">
+        delete from bss_sys_rolesys where roleid = #roleId# 
+        <dynamic>
+            <isNotNull property="systemId">
+                and sysid = #systemId#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    <delete id="deleteDeployNodeAuth" parameterClass="map">
+        delete from bss_sys_rolenode where rsid = #rsId#
+        <dynamic>
+            <isNotNull property="deployNodeId">
+                and nodeid = #deployNodeId#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    <delete id="deleteModuleAuth" parameterClass="map">
+        delete from bss_sys_rolemodule where rnid = #rnId#
+        <dynamic>
+            <isNotNull property="moduleId">
+                and moduleid = #moduleId#
+            </isNotNull>
+        </dynamic>
+    </delete> 
+    <delete id="deleteOperationAuth" parameterClass="map">
+        delete from bss_sys_roleoperate where rmid = #rmId#
+        <dynamic>
+            <isNotNull property="operationId">
+                and operateid = #operationId#
+            </isNotNull>
+        </dynamic>
+    </delete>     
+</sqlMap>
+

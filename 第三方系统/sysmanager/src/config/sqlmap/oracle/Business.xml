@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Business">
+	<sql id="SELECT-business">
+		select t.bussid    as businessId,
+		       t.busscode  as businessCode,
+		       t.bussname  as businessName,
+		       t.showorder as showOrder,
+		       t.remark    as remark
+		  from bss_sys_business t
+	</sql>
+
+	<sql id="CONDITION-businessId">where t.bussid = #businessId#</sql>
+	<sql id="CONDITION-businessName">where t.bussname = #businessName#</sql>
+	<sql id="CONDITION-businessCode">where t.busscode = #businessCode#</sql>
+	
+	<sql id="prefixTotalCount">select count(*) total from (</sql>
+	<sql id="suffixTotalCount">)</sql>
+
+	<select id="getBusinessList_count" parameterClass="string"
+		resultClass="int">
+		<include refid="prefixTotalCount" />
+		<include refid="SELECT-business" />
+		<dynamic>
+			<isNotNull property="businessId">
+				<include refid="CONDITION-businessId" />
+			</isNotNull>
+		</dynamic>
+		<include refid="suffixTotalCount" />
+	</select>
+
+	<select id="getBusinessList" parameterClass="string"
+		resultClass="business">
+		<include refid="SELECT-business" />
+		<dynamic>
+			<isNotNull property="businessId">
+				<include refid="CONDITION-businessId" />
+			</isNotNull>
+		</dynamic>
+	</select>
+    
+    <select id="getBusinessListByBizCodes" parameterClass="map" resultClass="business">
+        <include refid="SELECT-business"/>
+        where busscode in 
+        <iterate property="bizCodeList" open="(" close=")" conjunction=",">
+            #bizCodeList[]#
+        </iterate>
+        order by showorder
+    </select>
+    
+    <select id="getAllBusinessList" resultClass="business">
+        <include refid="SELECT-business"/>
+        order by t.showorder
+    </select>
+	<select id="getEntityBusinessList" parameterClass="string" resultClass="business">
+		<include refid="SELECT-business"/>
+		   where t.busscode <![CDATA[ <> ]]> #ALL_BIZ_CODE#
+		   order by t.showorder
+	</select>    
+    
+    <select id="getBusinessListForCommonUser" parameterClass="string" resultClass="business">
+        <include refid="SELECT-business"/>
+        where t.bussid in (select ub.bussid from bss_sys_userbusiness ub where ub.username = #userName#)
+        order by t.showorder
+    </select>
+    
+	<select id="getBusinessById" parameterClass="string"
+		resultClass="business">
+		<include refid="SELECT-business" />
+		<include refid="CONDITION-businessId" />
+	</select>
+	<select id="getBusinessByName" parameterClass="string"
+		resultClass="business">
+		<include refid="SELECT-business" />
+		<include refid="CONDITION-businessName" />
+	</select>
+	<select id="getBusinessByCode" parameterClass="string"
+		resultClass="business">
+		<include refid="SELECT-business" />
+		<include refid="CONDITION-businessCode" />
+	</select>
+
+    <select id="getUsedBusiness" parameterClass="string" resultClass="business">
+        select t.bussid as businessId from bss_sys_userbusiness t where t.bussid = #businessId#
+    </select>
+
+	<insert id="insertBusiness">
+		<!--<selectKey resultClass="string" keyProperty="businessId">
+			select sequence_id.NEXTVAL AS businessId FROM DUAL
+		</selectKey>-->
+		insert into bss_sys_business (bussid, busscode, bussname,
+		showorder, remark) values(#businessCode#, #businessCode#,
+		#businessName#, #showOrder#, #remark#)
+	</insert>
+    <update id="updateBusiness">
+		 update bss_sys_business
+		   set busscode  = #businessCode#,
+		       bussname  = #businessName#,
+		       showorder = #showOrder#,
+		       remark    = #remark#
+		 where bussid = #businessId#
+    </update>
+    <delete id="deleteBusiness" parameterClass="string">
+        delete from bss_sys_business where bussid = #businessId#
+    </delete>
+     <update id="updateBusinessShowOder">
+		 update bss_sys_business
+		   set
+		       showorder = #showOrder#
+		 where busscode = #businessCode#
+    </update>
+</sqlMap>
+

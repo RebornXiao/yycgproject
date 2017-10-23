@@ -1,0 +1,57 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #dae6f7; FONT-SIZE: 9pt; BACKGROUND-IMAGE: url(../images/frame/left_bj.gif); SCROLLBAR-HIGHLIGHT-COLOR: #def1ff; SCROLLBAR-SHADOW-COLOR: #b0cff4; COLOR: #404040; SCROLLBAR-3DLIGHT-COLOR: #ffffff; SCROLLBAR-ARROW-COLOR: #366ab3; SCROLLBAR-TRACK-COLOR: #e7eff9; FONT-FAMILY: '???? FONT-SIZE 9pt'; SCROLLBAR-DARKSHADOW-COLOR: #5484bd; BACKGROUND-COLOR: #f7f7f7
+}
+TABLE {
+	FONT-SIZE: 9pt
+}
+TR {
+	FONT-SIZE: 9pt
+}
+TD {
+	FONT-SIZE: 9pt
+}
+P {
+	FONT-SIZE: 9pt
+}
+.input_ok {
+	BORDER-RIGHT: #006080 1px solid; BORDER-TOP: #006080 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #006080 1px solid; COLOR: #006080; BORDER-BOTTOM: #006080 1px solid; BACKGROUND-COLOR: #f0f8ff
+}
+.input_text {
+	BORDER-RIGHT: #c0c0c0 1px solid; BORDER-TOP: #c0c0c0 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #c0c0c0 1px solid; COLOR: #404040; BORDER-BOTTOM: #c0c0c0 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.input_button {
+	BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #f0f8ff 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #f0f8ff 1px solid; COLOR: #404040; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #e4e4e4
+}
+.dazi {
+	FONT-SIZE: 10.5pt
+}
+.title {
+	FONT-SIZE: 18pt
+}
+.content {
+	FONT-SIZE: 12pt; LINE-HEIGHT: 150%
+}
+.huilan {
+	COLOR: #004060
+}
+.hei {
+	COLOR: #e05600
+}
+.white {
+	COLOR: #ffffff
+}
+A:link {
+	COLOR: #202020; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #202020; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+A:active {
+	BORDER-RIGHT: #000066 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #000066 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; BORDER-LEFT: #000066 1px solid; CURSOR: hand; COLOR: #ffffff; PADDING-TOP: 2px; BORDER-BOTTOM: #000066 1px solid; POSITION: relative; HEIGHT: 17px; BACKGROUND-COLOR: #000066; TEXT-DECORATION: none
+}
+.webfx-tree-item A.selected-inactive {
+	BACKGROUND: #3366cc; COLOR: #ffffff
+}

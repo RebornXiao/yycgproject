@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- dao层实现 -->
+	<bean id="moduleDao" class="zzvcom.sys.dao.impl.ModuleDaoImpl">
+	</bean>
+	<bean id="operDao" class="zzvcom.sys.dao.impl.ModuleOperDaoImpl"></bean>
+	<bean id="dicttypedao" class="zzvcom.sys.dao.impl.DicttypeDAOImpl">
+	</bean>
+	<bean id="dictinfodao" class="zzvcom.sys.dao.impl.DictinfoDAOImpl">
+	</bean>
+    <bean id="basicinfoDAO" class="zzvcom.sys.dao.impl.BasicinfoDAOImpl">
+	</bean>
+	<!-- 服务层实现 -->
+	<bean id="moduleService"
+		class="zzvcom.sys.service.impl.ModuleServiceImpl">
+		<property name="moduleDao" ref="moduleDao"></property>
+		<property name="operDao" ref="operDao"></property>
+	</bean>
+	<bean id="managerSystemConfigImpl"
+		class="zzvcom.sys.service.impl.ManagerSystemConfigImpl">
+		<property name="dicttypedao" ref="dicttypedao"></property>
+		<property name="dictinfodao" ref="dictinfodao"></property>
+	</bean>
+    <bean id="basicinfoService"
+		class="zzvcom.sys.service.impl.ManagerBasicInfoImpl">
+		<property name="basicinfoDAO" ref="basicinfoDAO"></property>
+	</bean>
+</beans>

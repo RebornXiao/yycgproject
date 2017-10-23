@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Operation">
+	<sql id="select-all-operation">
+		select t.operateid   as operationId,
+		       t.operatename as operationName,
+		       t.operatecode as operationCode,
+		       t.method      as method,
+		       t.moduleid    as moduleId,
+		       m.name        as moduleName,
+		       t.icon        as icon,
+		       t.showorder   as showOrder
+		  from bss_sys_operate t, bss_sys_module m
+		 where t.moduleid = m.moduleid
+	</sql>
+    <sql id="order-by-showorder">order by t.showorder</sql>
+    
+    <select id="getOperationListForAdmin" parameterClass="string" resultClass="operation">
+        <include refid="select-all-operation"/>
+         and t.moduleid = #bottomModuleId#
+         <include refid="order-by-showorder"/>
+    </select>
+    
+    <select id="getOperationById" parameterClass="string" resultClass="operation">
+        <include refid="select-all-operation"/>
+        and t.operateid = #operationId#
+    </select>
+    
+    <select id="getOperationByName" parameterClass="string" resultClass="operation">
+         <include refid="select-all-operation"/>
+         and t.operatename = #operationName#
+    </select>
+    
+    <select id="getUsedOperationList" parameterClass="string" resultClass="operation">
+		select t.operateid as operationId
+		  from bss_sys_roleoperate t
+		 where t.operateid = #operationId#    
+    </select>
+    
+    <select id="getOperationListByIds" parameterClass="map" resultClass="operation">
+        <include refid="select-all-operation"/>
+        and t.operateid in 
+        <iterate property="operationIdList" open="(" close=")" conjunction=",">
+            #operationIdList[]#
+        </iterate>
+        <include refid="order-by-showorder"/>
+    </select>
+    
+    <insert id="insertOperation" parameterClass="operation">
+		insert into bss_sys_operate
+		  (operateid, operatename, operatecode, method, moduleid, icon, showorder)
+		values
+		  (sys_guid(), #operationName#, #operationCode#, #method#, #moduleId#,#icon#, #showOrder#)
+    </insert>
+    
+    <update id="updateOperation" parameterClass="operation">
+		update bss_sys_operate
+		   set operatename = #operationName#,
+		       operatecode = #operationCode#,
+		       method      = #method#,
+		       moduleid    = #moduleId#,
+		       icon        = #icon#,
+		       showorder   = #showOrder#
+		 where operateid = #operationId#
+    </update>
+    
+    <delete id="deleteOperation" parameterClass="string">
+        delete from bss_sys_operate where operateid = #operationId#
+    </delete>
+    
+    <update id="saveOrder" parameterClass="operation">
+        update bss_sys_operate set showorder = #showOrder#  where operateid = #operationId#
+    </update>
+      
+     <delete id="deleteOperationByModuleid" parameterClass="string">
+        delete from BSS_SYS_OPERATE where moduleid = #moduleId#
+    </delete>
+</sqlMap>
+
